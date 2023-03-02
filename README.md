@@ -1,4 +1,4 @@
-# Data-Challenge-1-template-code
+# Data Challenge 1
 This repository contains the template code for the TU/e course JBG040 Data Challenge 1.
 Please read this document carefully as it has been filled out with important information.
 
