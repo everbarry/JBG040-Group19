@@ -36,7 +36,7 @@ def checkData():
             flag = True
     if flag:
         ### Load labels
-        train_y = load_numpy_arr_from_url(url="https://surfdrive.surf.nl/files/index.php/s/i6MvQ8nqoiQ9Tci/download")
+    train_y = load_numpy_arr_from_url(url="https://surfdrive.surf.nl/files/index.php/s/i6MvQ8nqoiQ9Tci/download")
     np.save("../data/Y_train.npy", train_y)
     test_y = load_numpy_arr_from_url(url="https://surfdrive.surf.nl/files/index.php/s/wLXiOjVAW4AWlXY/download")
     np.save("../data/Y_test.npy", test_y)

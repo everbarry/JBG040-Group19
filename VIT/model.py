@@ -116,6 +116,9 @@ class VisionTransformer(nn.Module):
         return C
 
 class CosineWarmupScheduler(optim.lr_scheduler._LRScheduler):
+    """
+    TODO: use this with adam
+    """
     def __init__(self, optimizer, warmup, max_iters):
         self.warmup = warmup
         self.max_num_iters = max_iters
