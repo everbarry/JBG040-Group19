@@ -34,7 +34,7 @@ def checkData():
     flag = False
     file_list = ["X_train.npy", "X_test.npy", "Y_train.npy", "Y_test.npy"]
     for file in file_list:
-        file_path = os.path.join("my_directory", file)
+        file_path = os.path.join('../data/', file)
         if not os.path.isfile(file_path):
             flag = True
     if flag:
