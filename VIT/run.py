@@ -17,6 +17,9 @@ from train_test import trainLoop, testLoop, visAttention
 def initEnv(random_seed=19):
     """ function that initializes and return device, sets random seeed for repeatable results. """
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')# if cuda gpu available use that
+    # support Apple Silicon
+    if torch.backends.mps.is_available():
+        device = 'mps'
     # set fixed random seed for repeatability
     np.random.seed(random_seed)
     torch.manual_seed(random_seed)
