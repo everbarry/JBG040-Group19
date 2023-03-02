@@ -2,6 +2,25 @@
 This repository contains the template code for the TU/e course JBG040 Data Challenge 1.
 Please read this document carefully as it has been filled out with important information.
 
+## Get Started
+to get started working on this open a terminal, type in `cd <theDirectory/youWant/toWorkin>`, then only the first time you download the repo do:
+```
+git clone https://github.com/everbarry/JBG040-Group19.git
+cd JBG040-Group19/
+conda create --name dbl python=3.10 
+conda activate dbl 
+conda install --file requirements.txt
+```
+this downloads the repository, creates a new environment for this project and then installs all the dependencies.
+Now anytime you want to run anything related to this project before make sure you are in the correct environment by typing in the terminal `conda activate dbl`, once activated navigate to the `JBG040-Group19` folder with `cd /path/to/JBG040-Group19`.
+Now to download the data in that terminal run:
+```
+cd VIT
+python3 run.py -v
+```
+this runs the model on the test set with pretrained weights and downloads the data to the `data` folder 
+for more informaton about the ViT see the README in its folder
+
 ## Code structure
 The template code is structured into multiple files, based on their functionality. 
 There are five `.py` files in total, each containing a different part of the code. 
