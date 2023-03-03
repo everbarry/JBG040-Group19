@@ -39,15 +39,15 @@ def checkData():
             flag = True
     if flag:
         ### Load labels
-    train_y = load_numpy_arr_from_url(url="https://surfdrive.surf.nl/files/index.php/s/i6MvQ8nqoiQ9Tci/download")
-    np.save("../data/Y_train.npy", train_y)
-    test_y = load_numpy_arr_from_url(url="https://surfdrive.surf.nl/files/index.php/s/wLXiOjVAW4AWlXY/download")
-    np.save("../data/Y_test.npy", test_y)
-    ### Load data
-    train_x = load_numpy_arr_from_url(url="https://surfdrive.surf.nl/files/index.php/s/4rwSf9SYO1ydGtK/download")
-    np.save("../data/X_train.npy", train_x)
-    test_x = load_numpy_arr_from_url(url="https://surfdrive.surf.nl/files/index.php/s/dvY2LpvFo6dHef0/download")
-    np.save("../data/X_test.npy", test_x)
+        train_y = load_numpy_arr_from_url(url="https://surfdrive.surf.nl/files/index.php/s/i6MvQ8nqoiQ9Tci/download")
+        np.save("../data/Y_train.npy", train_y)
+        test_y = load_numpy_arr_from_url(url="https://surfdrive.surf.nl/files/index.php/s/wLXiOjVAW4AWlXY/download")
+        np.save("../data/Y_test.npy", test_y)
+        ### Load data
+        train_x = load_numpy_arr_from_url(url="https://surfdrive.surf.nl/files/index.php/s/4rwSf9SYO1ydGtK/download")
+        np.save("../data/X_train.npy", train_x)
+        test_x = load_numpy_arr_from_url(url="https://surfdrive.surf.nl/files/index.php/s/dvY2LpvFo6dHef0/download")
+        np.save("../data/X_test.npy", test_x)
 
 
 def load_numpy_arr_from_url(url: str) -> np.ndarray:
