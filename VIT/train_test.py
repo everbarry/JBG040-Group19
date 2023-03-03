@@ -33,6 +33,7 @@ def trainLoop(device, optimizer, criterion, train_loader, model, epochs):
         epoch+1, train_loss, correct, total, train_acc))
     # save weights
     timestamp = str(datetime.now())[5:19]
+    timestamp = timestamp.replace(" ", "_")
     torch.save(model.state_dict(), f"models/Vit-{timestamp}.pt")
     return train_acc
 
