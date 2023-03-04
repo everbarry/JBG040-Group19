@@ -17,6 +17,8 @@ def train_model(
     # Put the model in train mode:
     model.train()
     # Feed all the batches one by one:
+    correct = 0
+    total = 0
     for batch in tqdm(train_sampler):
         # Get a batch:
         x, y = batch
@@ -34,7 +36,11 @@ def train_model(
         loss.backward()
         # We then make the optimizer take a step in the right direction.
         optimizer.step()
-    return losses
+        _, predicted = torch.max(predictions, 1)
+        correct += (predicted == y).sum().item()
+        total += len(y)
+    print(f'correct: {correct}/{total}\nacc: {correct/total:.2f}')
+    return losses, correct, total
 
 
 def test_model(
@@ -47,6 +53,8 @@ def test_model(
     model.eval()
     losses = []
     # We need to make sure we do not update our model based on the test data:
+    correct = 0
+    total = 0
     with torch.no_grad():
         for (x, y) in tqdm(test_sampler):
             # Making sure our samples are stored on the same device as our model:
@@ -55,4 +63,9 @@ def test_model(
             prediction = model.forward(x)
             loss = loss_function(prediction, y)
             losses.append(loss)
-    return losses
+            _, predicted = torch.max(prediction, 1)
+            correct += (predicted == y).sum().item()
+            total += len(y)
+
+    print(f'correct: {correct}/{total}\nacc: {correct / total:.2f}')
+    return losses, correct, total

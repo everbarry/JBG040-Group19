@@ -24,8 +24,8 @@ from typing import List
 def main(args: argparse.Namespace, activeloop: bool = True) -> None:
 
     # Load the train and test data set
-    train_dataset = ImageDataset(Path("data/X_train.npy"), Path("data/Y_train.npy"))
-    test_dataset = ImageDataset(Path("data/X_test.npy"), Path("data/Y_test.npy"))
+    train_dataset = ImageDataset(Path("../data/X_train.npy"), Path("../data/Y_train.npy"))
+    test_dataset = ImageDataset(Path("../data/X_test.npy"), Path("../data/Y_test.npy"))
 
     # Load the Neural Net. NOTE: set number of distinct labels here
     model = Net(n_classes=6)
@@ -73,24 +73,30 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
 
     mean_losses_train: List[torch.Tensor] = []
     mean_losses_test: List[torch.Tensor] = []
-    
+    correct_tr = 0
+    total_tr = 0
+    correct_test = 0
+    total_test = 0
     for e in range(n_epochs):
         if activeloop:
 
             # Training:
-            losses = train_model(model, train_sampler, optimizer, loss_function, device)
+            losses = train_model(model, train_sampler, optimizer, loss_function, device)[0]
             # Calculating and printing statistics:
             mean_loss = sum(losses) / len(losses)
             mean_losses_train.append(mean_loss)
             print(f"\nEpoch {e + 1} training done, loss on train set: {mean_loss}\n")
-
+            correct_tr += train_model(model, train_sampler, optimizer, loss_function, device)[1]
+            total_tr += train_model(model, train_sampler, optimizer, loss_function, device)[2]
             # Testing:
-            losses = test_model(model, test_sampler, loss_function, device)
+            losses = test_model(model, test_sampler, loss_function, device)[0]
 
             # # Calculating and printing statistics:
             mean_loss = sum(losses) / len(losses)
             mean_losses_test.append(mean_loss)
             print(f"\nEpoch {e + 1} testing done, loss on test set: {mean_loss}\n")
+            correct_test += test_model(model, test_sampler, loss_function, device)[1]
+            total_test += test_model(model, test_sampler, loss_function, device)[2]
 
             ### Plotting during training
             plotext.clf()
@@ -101,7 +107,8 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
             plotext.xticks([i for i in range(len(mean_losses_train) + 1)])
 
             plotext.show()
-
+    print(f'correct: {correct_tr}/{total_tr}\nacc: {correct_tr/total_tr:.2f}')
+    print(f'correct: {correct_test}/{total_test}\nacc: {correct_test / total_test:.2f}')
     # retrieve current time to label artifacts
     now = datetime.now()
     # check if model_weights/ subdir exists
