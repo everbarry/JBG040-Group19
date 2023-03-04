@@ -120,7 +120,7 @@ def main():
         summary(model, tuple(input_size), device=str(device))
 
     if args.val:
-        weights = torch.load('models/test.pt')
+        weights = torch.load('models/test.pt', map_location=device)
         # Load the weights into the model
         model.load_state_dict(weights)
         print('Loaded pretrained weights...')
