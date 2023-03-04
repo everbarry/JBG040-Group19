@@ -42,4 +42,5 @@ these are all command line argument options:
 - -o {SGD,Adam}, --optimizer {SGD,Adam}              speecify optimizer to use with the model
 - -w N_WORKERS, --n-workers N_WORKERS                specify number of CPU threads to load data
 - -b N_BATCHES, --n-batches N_BATCHES                specify number of batches to split the dataset into
-- -v, --model-summary                                if specified model summary will be displayed
+- -s, --model-summary                                if specified model summary will be displayed
+- -v, --val                                          if specified loads pretrained weights, validates model, and displays visualizations
