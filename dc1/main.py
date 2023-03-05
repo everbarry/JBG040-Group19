@@ -1,8 +1,9 @@
 # Custom imports
-from dc1.batch_sampler import BatchSampler
-from dc1.image_dataset import ImageDataset
-from dc1.net import Net
-from dc1.train_test import train_model, test_model
+from batch_sampler import BatchSampler
+from image_dataset import ImageDataset
+from net import Net
+from train_test import train_model, test_model
+from vis.modelvis import modelvis
 
 # Torch imports
 import torch
@@ -63,6 +64,11 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
         # Creating a summary of our model and its layers:
         summary(model, (1, 128, 128), device=device)
 
+    # Show a pgf of model architecture in the browser
+    if  args.modelvis:
+        modelvis(model, args, device=device)
+
+
     # Lets now train and test our model for multiple epochs:
     train_sampler = BatchSampler(
         batch_size=batch_size, dataset=train_dataset, balanced=args.balanced_batches
@@ -98,17 +104,21 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
             correct_test += test_model(model, test_sampler, loss_function, device)[1]
             total_test += test_model(model, test_sampler, loss_function, device)[2]
 
-            ### Plotting during training
-            plotext.clf()
-            plotext.scatter(mean_losses_train, label="train")
-            plotext.scatter(mean_losses_test, label="test")
-            plotext.title("Train and test loss")
+            if args.plot:
+                 plotext.clf()
+                 plotext.scatter(mean_losses_train, label="train")
+                 plotext.scatter(mean_losses_test, label="test")
+                 plotext.title("Train and test loss")
+ 
+                 plotext.xticks([i for i in range(len(mean_losses_train) + 1)])
+ 
+                 plotext.show()
 
-            plotext.xticks([i for i in range(len(mean_losses_train) + 1)])
 
-            plotext.show()
+    # Accuracy statistics after training
     print(f'correct: {correct_tr}/{total_tr}\nacc: {correct_tr/total_tr:.2f}')
     print(f'correct: {correct_test}/{total_test}\nacc: {correct_test / total_test:.2f}')
+
     # retrieve current time to label artifacts
     now = datetime.now()
     # check if model_weights/ subdir exists
@@ -147,6 +157,32 @@ if __name__ == "__main__":
         default=True,
         type=bool,
     )
+    parser.add_argument(
+        "-p", "--plot",
+        help="Plot during training",
+        default=False,
+        action="store_true",
+    )
+    parser.add_argument(
+        "-v", "--modelvis",
+        help="Enable model vis. Open a model visualization in the browser (default: False)",
+        default=False,
+        action="store_true",
+    )
+    parser.add_argument(
+        "-A", "--showattrib",
+        help="Show attributes during model vis (default: False)",
+        default=False,
+        action="store_true",
+    )
+    parser.add_argument(
+        "-c", "--showsaved",
+        help="Show saved tensors during model vis (default: True)",
+        default=True,
+        action="store_true",
+    )
+
+
     args = parser.parse_args()
 
     main(args)
