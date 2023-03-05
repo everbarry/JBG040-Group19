@@ -80,7 +80,7 @@ def parser():
     parser.add_argument('-b', '--n-batches', help='specify number of batches to split the dataset into', default=64, type=int)
     parser.add_argument('-s', '--model-summary', help='if specified model summary will be displayed', action='store_true')
     parser.add_argument('-v', '--val', help='if specified load best weights, validate model and display visualizations', action='store_true')
-    parser.add_argument('-ws', '--warmup-scheduler', help='specify the number of batches of warmup for the learning rate scheduler', default=200, type=int)
+    parser.add_argument('-ws', '--warmup-scheduler', help='specify the number of batches of warmup for the learning rate scheduler', default=30, type=int)
     # return arguments
     return parser.parse_args()
 
