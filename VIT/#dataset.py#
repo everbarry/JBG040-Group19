@@ -1,0 +1,16 @@
+ta matrix
+        self.y = np.eye(num_labels)[self.y]
+        # images normalized to 0-1
+        self.x = XrayDataset.load_np_arr_from_npy(x)/255
+
+    def __len__(self):
+        return len(self.y)
+
+    def __getitem__(self, idx: int) -> Tuple[torch.Tensor, np.ndarray]:
+        image = torch.from_numpy(self.x[idx]).float()
+        label = self.y[idx]
+        return image, label
+
+    @staticmethod
+    def load_np_arr_from_npy(path) -> np.ndarray:
+        return np.load(path)

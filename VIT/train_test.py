@@ -4,7 +4,7 @@ from tqdm import tqdm
 from datetime import datetime
 from vis import *
 
-def trainLoop(device, optimizer, criterion, train_loader, model, epochs):
+def trainLoop(device, optimizer, scheduler, criterion, train_loader, model, epochs):
     """ function that trains model on given device with given parameters."""
     for epoch in range(epochs):
         train_losses = []
@@ -15,7 +15,7 @@ def trainLoop(device, optimizer, criterion, train_loader, model, epochs):
             X, y = batch_sample
             X = X.to(device)
             y = y.to(device)
-            y = y.long()
+            # y = y.long()
             y = y.to(device)
             # forward, backward pass, optimizer step
             optimizer.zero_grad()
@@ -23,10 +23,15 @@ def trainLoop(device, optimizer, criterion, train_loader, model, epochs):
             loss = criterion(output, y)
             loss.backward()
             train_losses.append(loss.item())
+            # update optimizer and learning rate scheduler
             optimizer.step()
+            scheduler.step()
+
             _, predicted = torch.max(output, 1)
-            correct += (predicted == y).sum().item()
+            _, target = torch.max(y, 1)
+            correct += torch.eq(predicted, target).sum()
             total += len(y)
+            # print(correct, total)
         train_loss = float(np.mean(train_losses))
         train_acc = 100 * correct / total
         print('\nTrain set: Epoch: {}, Average loss: {:.4f}, Accuracy: {}/{} ({:.2f}%)'.format(
@@ -48,7 +53,7 @@ def testLoop(device, model, criterion, optimizer, test_loader):
             X, y = batch_sample
             X = X.to(device)
             y = y.to(device)
-            y = y.long()
+            # y = y.long()
             y = y.to(device)
             # get output and calculate loss
             optimizer.zero_grad()            # avoid gradient accumulation
@@ -57,7 +62,8 @@ def testLoop(device, model, criterion, optimizer, test_loader):
             test_losses.append(loss.item())  # storing loss
 
             _, predicted = torch.max(output, 1)
-            correct += (predicted == y).sum().item()
+            _, target = torch.max(y, 1)
+            correct += torch.eq(predicted, target).sum()
         # return results
         test_loss = float(np.mean(test_losses))
         test_acc = 100 * correct / len(test_loader.dataset)
