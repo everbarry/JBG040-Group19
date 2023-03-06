@@ -15,4 +15,4 @@ for value, count in zip(unique_values, value_counts):
 
 t = torch.tensor(r)
 x = torch.tensor([0.1494, 0.1400, 0.1782, 0.3573, 0.0966, 0.0785])
-print(t,'\n', x)
+print(l)
