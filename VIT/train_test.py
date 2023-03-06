@@ -2,7 +2,9 @@ import numpy as np
 import torch
 from tqdm import tqdm
 from datetime import datetime
+from sklearn.metrics import confusion_matrix
 from vis import *
+
 
 def trainLoop(device, optimizer, scheduler, criterion, train_loader, model, epochs):
     """ function that trains model on given device with given parameters."""
@@ -47,6 +49,7 @@ def testLoop(device, model, criterion, optimizer, test_loader):
     # to not train over the test set
     with torch.no_grad():
         test_losses = []
+        y_true, y_pred = [], []
         correct = 0
         for batch_idx, batch_sample in enumerate(tqdm(test_loader)):
             # get data from dataloader
@@ -63,10 +66,16 @@ def testLoop(device, model, criterion, optimizer, test_loader):
 
             _, predicted = torch.max(output, 1)
             _, target = torch.max(y, 1)
+            y_true.append(target.cpu().numpy())
+            y_pred.append(predicted.cpu().numpy())
             correct += torch.eq(predicted, target).sum()
         # return results
         test_loss = float(np.mean(test_losses))
         test_acc = 100 * correct / len(test_loader.dataset)
+        y_true = [item for sublist in y_true for item in sublist]
+        y_pred = [item for sublist in y_pred for item in sublist]
+        cm = confusion_matrix(y_true, y_pred)
+        print(cm)
         print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.2f}%)'.format(test_acc, correct, len(test_loader.dataset), test_acc))
         return (correct,len(test_loader.dataset), test_acc, test_loss)
 
