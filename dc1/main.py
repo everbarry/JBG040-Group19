@@ -2,7 +2,7 @@
 from batch_sampler import BatchSampler
 from image_dataset import ImageDataset
 from net import Net
-from train_test import train_model, test_model
+from train_test import train_model, test_model, gen_confusion
 from vis.modelvis import modelvis
 
 # Torch imports
@@ -104,6 +104,8 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
             correct_test += test_model(model, test_sampler, loss_function, device)[1]
             total_test += test_model(model, test_sampler, loss_function, device)[2]
 
+            gen_confusion(model, test_sampler, device)
+
             if args.plot:
                  plotext.clf()
                  plotext.scatter(mean_losses_train, label="train")
@@ -178,7 +180,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "-c", "--showsaved",
         help="Show saved tensors during model vis (default: True)",
-        default=True,
+        default=False,
         action="store_true",
     )
 
