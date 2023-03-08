@@ -11,3 +11,5 @@ __pycache__/
 **/.ipynb_checkpoints/
 data/*.npy
 **.gv
+.idea/
+.ipynb_checkpoints
