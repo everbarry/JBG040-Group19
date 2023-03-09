@@ -1,7 +1,11 @@
 from tqdm import tqdm
+
 import torch
-from dc1.net import Net
-from dc1.batch_sampler import BatchSampler
+import numpy as np
+from sklearn.metrics import confusion_matrix
+
+from net import Net
+from batch_sampler import BatchSampler
 from typing import Callable, List
 
 
@@ -78,3 +82,29 @@ def test_model(
 
     print(f'correct: {correct}/{total}\nacc: {correct / total:.2f}')
     return losses, correct, total
+
+
+# TODO: generate confusion matrix for classes.
+def gen_confusion(
+        model: Net,
+        test_sampler: BatchSampler,
+        device: str,
+) -> List[torch.Tensor]:
+    model.eval()
+    predy = []
+    truey = []
+
+    with torch.no_grad():
+        for (x, y) in tqdm(test_sampler):
+            truey = np.append(truey, y)
+            # Making sure our samples are stored on the same device as our model:
+            x = x.to(device)
+            y = y.to(device)
+            prediction = model.forward(x)
+            _, predicted = torch.max(prediction, 1)
+            predy = np.append(predy, predicted.to('cpu'))
+
+    result = confusion_matrix(truey, predy)
+    print(result)
+    return result
+

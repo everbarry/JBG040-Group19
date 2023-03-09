@@ -1,7 +1,7 @@
 import numpy as np
 import random
 import torch
-from dc1.image_dataset import ImageDataset
+from image_dataset import ImageDataset
 from typing import Generator, Tuple
 
 

@@ -1,1 +1,15 @@
 data/*
+VIT/__pycache__/*
+local/
+Data_Challenge_1_template.egg-info/
+data/
+model_weights/
+*.ipynb
+artifacts/
+.DS_store
+__pycache__/
+**/.ipynb_checkpoints/
+data/*.npy
+**.gv
+.idea/
+.ipynb_checkpoints
