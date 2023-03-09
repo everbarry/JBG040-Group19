@@ -5,6 +5,14 @@ from dc1.batch_sampler import BatchSampler
 from typing import Callable, List
 
 
+def checkpoint(model, filename):
+    torch.save(model.state_dict(), filename)
+
+
+def resume(model, filename):
+    model.load_state_dict(torch.load(filename))
+
+
 def train_model(
         model: Net,
         train_sampler: BatchSampler,
@@ -19,6 +27,7 @@ def train_model(
     # Feed all the batches one by one:
     correct = 0
     total = 0
+
     for batch in tqdm(train_sampler):
         # Get a batch:
         x, y = batch

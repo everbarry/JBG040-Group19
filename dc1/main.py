@@ -21,6 +21,14 @@ from pathlib import Path
 from typing import List
 
 
+def checkpoint(model, filename):
+    torch.save(model.state_dict(), filename)
+
+
+def resume(model, filename):
+    model.load_state_dict(torch.load(filename))
+
+
 def main(args: argparse.Namespace, activeloop: bool = True) -> None:
 
     # Load the train and test data set
@@ -77,6 +85,9 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
     total_tr = 0
     correct_test = 0
     total_test = 0
+    early_stop_thresh = 5
+    best_accuracy = -1
+    best_epoch = -1
     for e in range(n_epochs):
         if activeloop:
 
@@ -97,6 +108,14 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
             print(f"\nEpoch {e + 1} testing done, loss on test set: {mean_loss}\n")
             correct_test += test_model(model, test_sampler, loss_function, device)[1]
             total_test += test_model(model, test_sampler, loss_function, device)[2]
+            acc = test_model(model, test_sampler, loss_function, device)[1]/ test_model(model, test_sampler, loss_function, device)[2]
+            if acc > best_accuracy:
+                best_accuracy = acc
+                best_epoch = e
+                checkpoint(model, "best_model.pth")
+            elif e - best_epoch > early_stop_thresh:
+                print("Early stopped training at epoch %d" % e)
+                break  # terminate the training loop
 
             ### Plotting during training
             plotext.clf()
@@ -107,6 +126,8 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
             plotext.xticks([i for i in range(len(mean_losses_train) + 1)])
 
             plotext.show()
+
+    resume(model, "best_model.pth")
     print(f'correct: {correct_tr}/{total_tr}\nacc: {correct_tr/total_tr:.2f}')
     print(f'correct: {correct_test}/{total_test}\nacc: {correct_test / total_test:.2f}')
     # retrieve current time to label artifacts
