@@ -19,7 +19,7 @@ cd VIT
 python3 run.py -v
 ```
 this runs the model on the test set with pretrained weights and downloads the data to the `data` folder 
-for more informaton about the ViT see the README in its folder
+for more informaton about the ViT see the README in its folder.
 
 ## Code structure
 The template code is structured into multiple files, based on their functionality. 
