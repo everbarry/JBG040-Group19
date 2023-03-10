@@ -63,6 +63,12 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
         # Creating a summary of our model and its layers:
         summary(model, (1, 128, 128), device=device)
 
+    def checkpoint(model, filename):
+        torch.save(model.state_dict(), filename)
+
+    def resume(model, filename):
+        model.load_state_dict(torch.load(filename))
+
     # Lets now train and test our model for multiple epochs:
     train_sampler = BatchSampler(
         batch_size=batch_size, dataset=train_dataset, balanced=args.balanced_batches
@@ -77,6 +83,9 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
     total_tr = 0
     correct_test = 0
     total_test = 0
+    early_stop_thresh = 5
+    best_accuracy = -1
+    best_epoch = -1
     for e in range(n_epochs):
         if activeloop:
 
@@ -98,6 +107,16 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
             correct_test += test_model(model, test_sampler, loss_function, device)[1]
             total_test += test_model(model, test_sampler, loss_function, device)[2]
 
+            acc = test_model(model, test_sampler, loss_function, device)[1]/test_model(model, test_sampler, loss_function, device)[2]
+            if acc > best_accuracy:
+                best_accuracy = acc
+                best_epoch = epoch
+                checkpoint(model, "best_model.pth")
+
+            elif epoch - best_epoch > early_stop_thresh:
+                print("Early stopped training at epoch %d" % epoch)
+                break  # terminate the training loop
+
             ### Plotting during training
             plotext.clf()
             plotext.scatter(mean_losses_train, label="train")
@@ -107,6 +126,8 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
             plotext.xticks([i for i in range(len(mean_losses_train) + 1)])
 
             plotext.show()
+
+    resume(model, "best_model.pth")
     print(f'correct: {correct_tr}/{total_tr}\nacc: {correct_tr/total_tr:.2f}')
     print(f'correct: {correct_test}/{total_test}\nacc: {correct_test / total_test:.2f}')
     # retrieve current time to label artifacts
