@@ -3,12 +3,15 @@ import torch
 import requests
 import io
 from os import path
-from typing import Tuple
+from typing import Tuple, List
 from pathlib import Path
 import os
 
+from torch.utils.data import Dataset
+import torchvision.transforms as transforms
 
-class ImageDataset:
+
+class ImageDataset(Dataset):
     """
     Creates a DataSet from numpy arrays while keeping the data
     in the more efficient numpy arrays for as long as possible and only
@@ -16,11 +19,13 @@ class ImageDataset:
     to pass the data through the neural network and apply weights).
     """
 
-    def __init__(self, x: Path, y: Path) -> None:
+    def __init__(self, x: Path, y: Path, transform=None) -> None:
         # Target labels
         self.targets = ImageDataset.load_numpy_arr_from_npy(y)
         # Images
         self.imgs = ImageDataset.load_numpy_arr_from_npy(x)
+        # Apply transform
+        self.transform = transform
 
     def __len__(self) -> int:
         return len(self.targets)
@@ -28,7 +33,24 @@ class ImageDataset:
     def __getitem__(self, idx: int) -> Tuple[torch.Tensor, np.ndarray]:
         image = torch.from_numpy(self.imgs[idx] / 255).float()
         label = self.targets[idx]
+        if self.transform:
+            image = self.transform(image)
         return image, label
+
+    def augment(self, idx: int, num_transforms:int = 5) -> Tuple[List[torch.Tensor], np.ndarray]:
+        # Determine which original image to use
+        img_idx = idx // num_transforms
+        # Load the original image
+        image = torch.from_numpy(self.imgs[img_idx] / 255).float()
+        label = self.targets[img_idx]
+        # Apply the transform multiple times and collect the resulting images
+        transformed_images = []
+        for i in range(num_transforms):
+            if self.transform:
+                transformed_image = self.transform(image)
+                transformed_images.append(transformed_image)
+        # Return a list of transformed images, along with their corresponding label
+        return transformed_images, label
 
     @staticmethod
     def load_numpy_arr_from_npy(path: Path) -> np.ndarray:
