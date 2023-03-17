@@ -1,9 +1,12 @@
 # Custom imports
 from batch_sampler import BatchSampler
-from image_dataset import ImageDataset
+from image_dataset import ImageDataset, AugImageDataset
 from net import Net
 from train_test import train_model, test_model, gen_confusion
+
+# Visualizations
 from vis.modelvis import modelvis
+from vis.augvis import visualize_augmentation
 
 # Torch imports
 import torch
@@ -25,8 +28,12 @@ from typing import List
 def main(args: argparse.Namespace, activeloop: bool = True) -> None:
 
     # Load the train and test data set
-    train_dataset = ImageDataset(Path("../data/X_train.npy"), Path("../data/Y_train.npy"))
-    test_dataset = ImageDataset(Path("../data/X_test.npy"), Path("../data/Y_test.npy"))
+    train_dataset = AugImageDataset(Path("../data/X_train.npy"), Path("../data/Y_train.npy"))
+    test_dataset = AugImageDataset(Path("../data/X_test.npy"), Path("../data/Y_test.npy"))
+
+    # Visualize dataset
+    if args.augvis:
+        visualize_augmentation(train_dataset)
 
     # Load the Neural Net. NOTE: set number of distinct labels here
     model = Net(n_classes=6)
@@ -180,6 +187,12 @@ if __name__ == "__main__":
     parser.add_argument(
         "-c", "--showsaved",
         help="Show saved tensors during model vis (default: True)",
+        default=False,
+        action="store_true",
+    )
+    parser.add_argument(
+        "--augvis",
+        help="Augmentation visualization",
         default=False,
         action="store_true",
     )

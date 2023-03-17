@@ -10,22 +10,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def augment_dataset(X_path:Path, y_path:Path, augmentation_iter:int = 5) -> ConcatDataset:
-    """
-    Extends the normal dataset generating random transformed images.
-    """
-    # Define your transformations
-    transform = transforms.Compose([
-        transforms.RandomAffine(degrees=5, scale=(0.95, 1.05)),
-    ])
-
-    # Create a PyTorch dataset from the X and y arrays
-    dataset = ConcatDataset(
-        [ImageDataset(X_path, y_path, transform = tr)
-         for tr in [None] + [transform] * augmentation_iter ])
-
-    return dataset
-
 def plot(imgs, with_orig=True, row_title=None, **imshow_kwargs) -> None:
     if not isinstance(imgs[0], list):
         # Make a 2d grid even if there's just 1 row
@@ -55,28 +39,15 @@ def plot(imgs, with_orig=True, row_title=None, **imshow_kwargs) -> None:
     plt.tight_layout()
 
 
-def visualize_augmentation(X_path:Path, y_path:Path, augmentation_iter:int = 5, nrows=4):
+def visualize_augmentation(augmented:ConcatDataset, nrows=4):
     """
     Visualize the augmentatative transformations.
     """
-    augmented = augment_dataset(X_path, y_path, augmentation_iter)
-    # random sample from the first dataset
+    ncols = len(augmented.cummulative_sizes)
     samp = np.random.randint(0, augmented.cummulative_sizes[0], size = nrows)
     augsamp = [[augmented.datasets[offset][samp[i]][0][0]
-               for offset in range(augmentation_iter)]
+               for offset in range(ncols)]
                for i in range(nrows)]
     plot(augsamp)
 
     plt.show()
-
-
-    
-
-data = augment_dataset(Path("../data/X_train.npy"), Path("../data/Y_train.npy"))
-visualize_augmentation(Path("../data/X_train.npy"), Path("../data/Y_train.npy"))
-print(len(data))
-
-
-    
-
-
