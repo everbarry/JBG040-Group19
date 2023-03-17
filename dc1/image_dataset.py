@@ -8,7 +8,6 @@ from pathlib import Path
 import os
 
 from torch.utils.data import Dataset
-import torchvision.transforms as transforms
 
 
 class ImageDataset(Dataset):
@@ -31,26 +30,11 @@ class ImageDataset(Dataset):
         return len(self.targets)
 
     def __getitem__(self, idx: int) -> Tuple[torch.Tensor, np.ndarray]:
-        image = torch.from_numpy(self.imgs[idx] / 255).float()
+        image = torch.tensor(self.imgs[idx] / 255).float()
         label = self.targets[idx]
         if self.transform:
             image = self.transform(image)
         return image, label
-
-    def augment(self, idx: int, num_transforms:int = 5) -> Tuple[List[torch.Tensor], np.ndarray]:
-        # Determine which original image to use
-        img_idx = idx // num_transforms
-        # Load the original image
-        image = torch.from_numpy(self.imgs[img_idx] / 255).float()
-        label = self.targets[img_idx]
-        # Apply the transform multiple times and collect the resulting images
-        transformed_images = []
-        for i in range(num_transforms):
-            if self.transform:
-                transformed_image = self.transform(image)
-                transformed_images.append(transformed_image)
-        # Return a list of transformed images, along with their corresponding label
-        return transformed_images, label
 
     @staticmethod
     def load_numpy_arr_from_npy(path: Path) -> np.ndarray:
