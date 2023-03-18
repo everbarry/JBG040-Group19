@@ -2,7 +2,7 @@
 from batch_sampler import BatchSampler
 from image_dataset import ImageDataset, AugImageDataset
 from net import Net
-from train_test import train_model, test_model, gen_confusion
+from train_test import train_model, test_model
 
 # Visualizations
 from vis.modelvis import modelvis
@@ -25,19 +25,35 @@ from pathlib import Path
 from typing import List
 
 
-def checkpoint(model, filename):
+def checkpoint(model: Net) -> str:
+    """
+    Checkpoint the model and return the filename of the checkpoints.
+    """
+    now = datetime.now()
+    if not Path("model_weights/").exists():
+        os.mkdir(Path("model_weights/"))
+    filename = f"model_weights/model_{now.month:02}_{now.day:02}_{now.hour}_{now.minute:02}.txt"
     torch.save(model.state_dict(), filename)
+    return filename
 
 
-def resume(model, filename):
+def resume(model: Net, filename: str) -> None:
     model.load_state_dict(torch.load(filename))
 
 
 def main(args: argparse.Namespace, activeloop: bool = True) -> None:
 
     # Load the train and test data set
-    train_dataset = AugImageDataset(Path("../data/X_train.npy"), Path("../data/Y_train.npy"))
-    test_dataset = AugImageDataset(Path("../data/X_test.npy"), Path("../data/Y_test.npy"))
+    if args.augiter > 1:
+        train_dataset = AugImageDataset(
+            Path("../data/X_train.npy"), Path("../data/Y_train.npy"),
+            augmentation_iter=args.augiter)
+    else:
+        train_dataset = ImageDataset(
+            Path("../data/X_train.npy"), Path("../data/Y_train.npy"))
+            
+    test_dataset = ImageDataset(
+        Path("../data/X_test.npy"), Path("../data/Y_test.npy"))
 
     # Visualize dataset
     if args.augvis:
@@ -93,7 +109,8 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
     total_tr = 0
     correct_test = 0
     total_test = 0
-    early_stop_thresh = 5
+    early_stop_thresh = args.early_stop_thresh
+    best_checkpoint = ""
     best_accuracy = -1
     best_epoch = -1
     for e in range(n_epochs):
@@ -120,9 +137,10 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
             if acc > best_accuracy:
                 best_accuracy = acc
                 best_epoch = e
-                checkpoint(model, "best_model.pth")
+                best_checkpoint = checkpoint(model)
             elif e - best_epoch > early_stop_thresh:
                 print("Early stopped training at epoch %d" % e)
+                n_epochs = e + 1
                 break  # terminate the training loop
 
             ### Plotting during training
@@ -135,18 +153,12 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
 
             plotext.show()
 
-    resume(model, "best_model.pth")
+    resume(model, best_checkpoint)
     print(f'correct: {correct_tr}/{total_tr}\nacc: {correct_tr/total_tr:.2f}')
     print(f'correct: {correct_test}/{total_test}\nacc: {correct_test / total_test:.2f}')
     # retrieve current time to label artifacts
     now = datetime.now()
-    # check if model_weights/ subdir exists
-    if not Path("model_weights/").exists():
-        os.mkdir(Path("model_weights/"))
-    
-    # Saving the model
-    torch.save(model.state_dict(), f"model_weights/model_{now.month:02}_{now.day:02}_{now.hour}_{now.minute:02}.txt")
-    
+   
     # Create plot of losses
     figure(figsize=(9, 10), dpi=80)
     fig, (ax1, ax2) = plt.subplots(2, sharex=True)
@@ -205,6 +217,18 @@ if __name__ == "__main__":
         help="Augmentation visualization",
         default=False,
         action="store_true",
+    )
+    parser.add_argument(
+        "-a", "--augiter",
+        help="Augmentation itterations. Expands Training data set x fold.",
+        default=5,
+        type=int
+    )
+    parser.add_argument(
+        "-s", "--early_stop_thresh",
+        help="Epoch threshhold for early stopping",
+        default=5,
+        type=int
     )
 
 
