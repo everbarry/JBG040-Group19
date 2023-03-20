@@ -58,21 +58,10 @@ def testLoop(device, model, criterion, optimizer, test_loader):
 
             _, predicted = torch.max(output, 1)
             correct += (predicted == y).sum().item()
+            y_true.append(y)
+            y_pred.append(predicted)
         # return results
         test_loss = float(np.mean(test_losses))
         test_acc = 100 * correct / len(test_loader.dataset)
         print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.2f}%)'.format(test_acc, correct, len(test_loader.dataset), test_acc))
-        return (correct,len(test_loader.dataset), test_acc, test_loss)
-
-
-def visAttention(device, optimizer, model):
-    x = np.load('../data/X_test.npy')/255
-    with torch.no_grad():
-       image = x[np.random.randint(0,1000)]
-       image_tensor = torch.from_numpy(image).float()
-       image_tensor = image_tensor.to(device)
-       optimizer.zero_grad()
-       output, attn_masks = model(image_tensor, getAttention=True)
-       _, predicted = torch.max(output, 1)
-       # attn_masks = attn_masks.detach().cpu().numpy()
-       print(len(attn_masks), len(attn_masks[0]), attn_masks[1][1].max(), attn_masks[1][1].min(), attn_masks[1][1])
+        return (correct,len(test_loader.dataset), test_acc, test_loss, (y_true, y_pred))

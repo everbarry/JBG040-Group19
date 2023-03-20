@@ -2,7 +2,7 @@
 This repository contains the template code for the TU/e course JBG040 Data Challenge 1.
 Please read this document carefully as it has been filled out with important information.
 
-## Get Started
+## Get Started .
 to get started working on this open a terminal, type in `cd <theDirectory/youWant/toWorkin>`, then only the first time you download the repo do:
 ```
 git clone https://github.com/everbarry/JBG040-Group19.git

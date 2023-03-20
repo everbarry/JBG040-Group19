@@ -1,9 +1,5 @@
 from tqdm import tqdm
-
 import torch
-import numpy as np
-from sklearn.metrics import confusion_matrix
-
 from net import Net
 from batch_sampler import BatchSampler
 from typing import Callable, List
@@ -74,9 +70,13 @@ def test_model(
     # We need to make sure we do not update our model based on the test data:
     correct = 0
     total = 0
+<<<<<<< HEAD
     TP = 0
     FP = 0
     FN = 0
+=======
+    y_true, y_pred = [], []
+>>>>>>> 3803be762005044585eb69d7eb9321abcbfeac9d
     with torch.no_grad():
         for (x, y) in tqdm(test_sampler):
             # Making sure our samples are stored on the same device as our model:
@@ -88,6 +88,7 @@ def test_model(
             _, predicted = torch.max(prediction, 1)
             correct += (predicted == y).sum().item()
             total += len(y)
+<<<<<<< HEAD
             TP += ((predicted == 1) & (y == 1)).sum().item()
             FP += ((predicted == 1) & (y== 0)).sum().item()
             FN += ((predicted == 0) & (y== 1)).sum().item()
@@ -120,3 +121,10 @@ def gen_confusion(
     print(result)
     return result
 
+=======
+            y_true.append(y.cpu())
+            y_pred.append(predicted.cpu())
+
+    print(f'correct: {correct}/{total}\nacc: {correct / total:.2f}')
+    return losses, correct, total, (y_true, y_pred)
+>>>>>>> 3803be762005044585eb69d7eb9321abcbfeac9d
