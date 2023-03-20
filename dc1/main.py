@@ -181,9 +181,10 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
     recall_tr = total_tp_tr / (total_tp_tr + total_fn_tr)
     recall_test = total_tp_test / (total_fp_test + total_fn_test)
     #F1 = 2 x [(Precision x Recall) / (Precision + Recall)]
-
-    print(f'f1 score training: {2 * [(precision_tr * recall_tr) / (precision_tr + recall_tr)]:.2f}')
-    print(f'f1 score testing: {2 * [(precision_test * recall_test) / (precision_test + recall_test)]:.2f}')
+    f1_test = 2 * [(precision_tr * recall_tr) / (precision_tr + recall_tr)]
+    f1_train = 2 * [(precision_test * recall_test) / (precision_test + recall_test)]
+    print(f'f1 score training: {f1_train:.2f}')
+    print(f'f1 score testing: {f1_test:.2f}')
 
     # Create plot of losses
     figure(figsize=(9, 10), dpi=80)
