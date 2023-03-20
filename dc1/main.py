@@ -133,9 +133,9 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
             total_tr += a_2
             total_tp_tr += a_3
             total_fp_tr += a_4
-            total_fn_tr += a_t
+            total_fn_tr += a_5
             # Testing:
-            b_0, b_1, b_2, b_3, b_4, b_5 = test_model(model, test_sampler, loss_function, device)[0]
+            b_0, b_1, b_2, b_3, b_4, b_5 = test_model(model, test_sampler, loss_function, device)
             losses = b_0
             # # Calculating and printing statistics:
             mean_loss = sum(losses) / len(losses)
