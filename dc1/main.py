@@ -113,27 +113,40 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
     best_checkpoint = ""
     best_accuracy = -1
     best_epoch = -1
+    total_tp_tr = 0
+    total_fp_tr = 0
+    total_fn_tr = 0
+    total_tp_test = 0
+    total_fp_test = 0
+    total_fn_test = 0
     for e in range(n_epochs):
         if activeloop:
 
             # Training:
-            losses = train_model(model, train_sampler, optimizer, loss_function, device)[0]
+            a_0, a_1, a_2, a_3, a_4, a_5 = train_model(model, train_sampler, optimizer, loss_function, device)
             # Calculating and printing statistics:
+            losses = a_0
             mean_loss = sum(losses) / len(losses)
             mean_losses_train.append(mean_loss)
             print(f"\nEpoch {e + 1} training done, loss on train set: {mean_loss}\n")
-            correct_tr += train_model(model, train_sampler, optimizer, loss_function, device)[1]
-            total_tr += train_model(model, train_sampler, optimizer, loss_function, device)[2]
+            correct_tr += a_1
+            total_tr += a_2
+            total_tp_tr += a_3
+            total_fp_tr += a_4
+            total_fn_tr += a_t
             # Testing:
-            losses = test_model(model, test_sampler, loss_function, device)[0]
-
+            b_0, b_1, b_2, b_3, b_4, b_5 = test_model(model, test_sampler, loss_function, device)[0]
+            losses = b_0
             # # Calculating and printing statistics:
             mean_loss = sum(losses) / len(losses)
             mean_losses_test.append(mean_loss)
             print(f"\nEpoch {e + 1} testing done, loss on test set: {mean_loss}\n")
-            correct_test += test_model(model, test_sampler, loss_function, device)[1]
-            total_test += test_model(model, test_sampler, loss_function, device)[2]
-            acc = test_model(model, test_sampler, loss_function, device)[1]/ test_model(model, test_sampler, loss_function, device)[2]
+            correct_test += b_1
+            total_test += b_2
+            acc = b_1/ b_2
+            total_tp_test += b_3
+            total_fp_test += b_4
+            total_fn_test += b_5
             if acc > best_accuracy:
                 best_accuracy = acc
                 best_epoch = e
@@ -158,7 +171,20 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
     print(f'correct: {correct_test}/{total_test}\nacc: {correct_test / total_test:.2f}')
     # retrieve current time to label artifacts
     now = datetime.now()
-   
+    #Precision = TruePositives / (TruePositives + FalsePositives)
+    precision_tr = total_tp_tr / (total_fp_tr + total_tp_tr)
+    print(f'precision training: {precision_tr:.2f}')
+
+    precision_test = total_tp_test / (total_fp_test + total_tp_test)
+    print(f'precision training: {precision_test:.2f}')
+
+    recall_tr = total_tp_tr / (total_tp_tr + total_fn_tr)
+    recall_test = total_tp_test / (total_fp_test + total_fn_test)
+    #F1 = 2 x [(Precision x Recall) / (Precision + Recall)]
+
+    print(f'f1 score training: {2 * [(precision_tr * recall_tr) / (precision_tr + recall_tr)]:.2f}')
+    print(f'f1 score testing: {2 * [(precision_test * recall_test) / (precision_test + recall_test)]:.2f}')
+
     # Create plot of losses
     figure(figsize=(9, 10), dpi=80)
     fig, (ax1, ax2) = plt.subplots(2, sharex=True)

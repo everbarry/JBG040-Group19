@@ -2,11 +2,9 @@ import numpy as np
 import torch
 from tqdm import tqdm
 from datetime import datetime
-from sklearn.metrics import confusion_matrix
 from vis import *
 
-
-def trainLoop(device, optimizer, scheduler, criterion, train_loader, model, epochs):
+def trainLoop(device, optimizer, criterion, train_loader, model, epochs):
     """ function that trains model on given device with given parameters."""
     for epoch in range(epochs):
         train_losses = []
@@ -17,7 +15,7 @@ def trainLoop(device, optimizer, scheduler, criterion, train_loader, model, epoc
             X, y = batch_sample
             X = X.to(device)
             y = y.to(device)
-            # y = y.long()
+            y = y.long()
             y = y.to(device)
             # forward, backward pass, optimizer step
             optimizer.zero_grad()
@@ -25,15 +23,10 @@ def trainLoop(device, optimizer, scheduler, criterion, train_loader, model, epoc
             loss = criterion(output, y)
             loss.backward()
             train_losses.append(loss.item())
-            # update optimizer and learning rate scheduler
             optimizer.step()
-            scheduler.step()
-
             _, predicted = torch.max(output, 1)
-            _, target = torch.max(y, 1)
-            correct += torch.eq(predicted, target).sum()
+            correct += (predicted == y).sum().item()
             total += len(y)
-            # print(correct, total)
         train_loss = float(np.mean(train_losses))
         train_acc = 100 * correct / total
         print('\nTrain set: Epoch: {}, Average loss: {:.4f}, Accuracy: {}/{} ({:.2f}%)'.format(
@@ -49,14 +42,13 @@ def testLoop(device, model, criterion, optimizer, test_loader):
     # to not train over the test set
     with torch.no_grad():
         test_losses = []
-        y_true, y_pred = [], []
         correct = 0
         for batch_idx, batch_sample in enumerate(tqdm(test_loader)):
             # get data from dataloader
             X, y = batch_sample
             X = X.to(device)
             y = y.to(device)
-            # y = y.long()
+            y = y.long()
             y = y.to(device)
             # get output and calculate loss
             optimizer.zero_grad()            # avoid gradient accumulation
@@ -65,17 +57,10 @@ def testLoop(device, model, criterion, optimizer, test_loader):
             test_losses.append(loss.item())  # storing loss
 
             _, predicted = torch.max(output, 1)
-            _, target = torch.max(y, 1)
-            y_true.append(target.cpu().numpy())
-            y_pred.append(predicted.cpu().numpy())
-            correct += torch.eq(predicted, target).sum()
+            correct += (predicted == y).sum().item()
         # return results
         test_loss = float(np.mean(test_losses))
         test_acc = 100 * correct / len(test_loader.dataset)
-        y_true = [item for sublist in y_true for item in sublist]
-        y_pred = [item for sublist in y_pred for item in sublist]
-        cm = confusion_matrix(y_true, y_pred)
-        print(cm)
         print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.2f}%)'.format(test_acc, correct, len(test_loader.dataset), test_acc))
         return (correct,len(test_loader.dataset), test_acc, test_loss)
 
