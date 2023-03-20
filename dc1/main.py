@@ -5,7 +5,6 @@ from net import Net
 from train_test import train_model, test_model
 
 # Visualizations
-from vis.modelvis import modelvis
 from vis.augvis import visualize_augmentation
 
 # Torch imports
@@ -23,6 +22,7 @@ import plotext  # type: ignore
 from datetime import datetime
 from pathlib import Path
 from typing import List
+from sklearn.metrics import confusion_matrix
 
 
 def checkpoint(model: Net) -> str:
@@ -51,7 +51,7 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
     else:
         train_dataset = ImageDataset(
             Path("../data/X_train.npy"), Path("../data/Y_train.npy"))
-            
+
     test_dataset = ImageDataset(
         Path("../data/X_test.npy"), Path("../data/Y_test.npy"))
 
@@ -113,6 +113,7 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
     best_checkpoint = ""
     best_accuracy = -1
     best_epoch = -1
+    y_true, y_pred = [], []
     for e in range(n_epochs):
         if activeloop:
 
@@ -125,7 +126,11 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
             correct_tr += train_model(model, train_sampler, optimizer, loss_function, device)[1]
             total_tr += train_model(model, train_sampler, optimizer, loss_function, device)[2]
             # Testing:
-            losses = test_model(model, test_sampler, loss_function, device)[0]
+            losses, _, _, ys = test_model(model, test_sampler, loss_function, device)
+            y_t, y_p = [item for sublist in ys[0] for item in sublist], [item for sublist in ys[1] for item in sublist]
+            y_true.append(y_t)
+            y_pred.append(y_p)
+
 
             # # Calculating and printing statistics:
             mean_loss = sum(losses) / len(losses)
@@ -158,15 +163,19 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
     print(f'correct: {correct_test}/{total_test}\nacc: {correct_test / total_test:.2f}')
     # retrieve current time to label artifacts
     now = datetime.now()
-   
+
+    # confusion matrix
+    y_true, y_pred = [item for sublist in y_true for item in sublist], [item for sublist in y_pred for item in sublist]
+    print(confusion_matrix(y_true, y_pred))
+
     # Create plot of losses
     figure(figsize=(9, 10), dpi=80)
     fig, (ax1, ax2) = plt.subplots(2, sharex=True)
-    
+
     ax1.plot(range(1, 1 + n_epochs), [x.detach().cpu() for x in mean_losses_train], label="Train", color="blue")
     ax2.plot(range(1, 1 + n_epochs), [x.detach().cpu() for x in mean_losses_test], label="Test", color="red")
     fig.legend()
-    
+
     # Check if /artifacts/ subdir exists
     if not Path("artifacts/").exists():
         os.mkdir(Path("artifacts/"))

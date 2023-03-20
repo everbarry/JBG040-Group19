@@ -64,6 +64,7 @@ def test_model(
     # We need to make sure we do not update our model based on the test data:
     correct = 0
     total = 0
+    y_true, y_pred = [], []
     with torch.no_grad():
         for (x, y) in tqdm(test_sampler):
             # Making sure our samples are stored on the same device as our model:
@@ -75,6 +76,8 @@ def test_model(
             _, predicted = torch.max(prediction, 1)
             correct += (predicted == y).sum().item()
             total += len(y)
+            y_true.append(y.cpu())
+            y_pred.append(predicted.cpu())
 
     print(f'correct: {correct}/{total}\nacc: {correct / total:.2f}')
-    return losses, correct, total
+    return losses, correct, total, (y_true, y_pred)
