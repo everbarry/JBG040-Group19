@@ -31,6 +31,9 @@ def train_model(
     # Feed all the batches one by one:
     correct = 0
     total = 0
+    TP = 0
+    FP = 0
+    FN = 0
 
     for batch in tqdm(train_sampler):
         # Get a batch:
@@ -52,8 +55,11 @@ def train_model(
         _, predicted = torch.max(predictions, 1)
         correct += (predicted == y).sum().item()
         total += len(y)
+        TP += ((predicted == 1) & (y == 1)).sum().item()
+        FP += ((predicted == 1) & (y == 0)).sum().item()
+        FN += ((predicted == 0) & (y == 1)).sum().item()
     print(f'correct: {correct}/{total}\nacc: {correct/total:.2f}')
-    return losses, correct, total
+    return losses, correct, total, TP, FP, FN
 
 
 def test_model(
@@ -68,6 +74,9 @@ def test_model(
     # We need to make sure we do not update our model based on the test data:
     correct = 0
     total = 0
+    TP = 0
+    FP = 0
+    FN = 0
     with torch.no_grad():
         for (x, y) in tqdm(test_sampler):
             # Making sure our samples are stored on the same device as our model:
@@ -79,9 +88,12 @@ def test_model(
             _, predicted = torch.max(prediction, 1)
             correct += (predicted == y).sum().item()
             total += len(y)
+            TP += ((predicted == 1) & (y == 1)).sum().item()
+            FP += ((predicted == 1) & (y== 0)).sum().item()
+            FN += ((predicted == 0) & (y== 1)).sum().item()
 
     print(f'correct: {correct}/{total}\nacc: {correct / total:.2f}')
-    return losses, correct, total
+    return losses, correct, total, TP, FP, FN
 
 
 # TODO: generate confusion matrix for classes.
