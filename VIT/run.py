@@ -11,7 +11,8 @@ from torch.utils.data import DataLoader
 # import modules
 from dataset import XrayDataset
 from model import VisionTransformer
-from train_test import trainLoop, testLoop, visAttention
+from train_test import trainLoop, testLoop
+from sklearn.metrics import confusion_matrix
 
 
 def initEnv(random_seed=19):
@@ -126,6 +127,9 @@ def main():
         print('Loaded pretrained weights...')
         #visAttention(device, optimizer, model)
         results = testLoop(device, model, criterion, optimizer, test_loader)
+        print(results[-1])
+        y_true, y_pred = [item for sublist in results[-1][0] for item in sublist], [item for sublist in results[-1][1] for item in sublist]
+        print(confusion_matrix(y_true, y_pred))
         return
         # train & test model
     train_accuracy = trainLoop(device, optimizer, criterion, train_loader, model, args.epochs)
