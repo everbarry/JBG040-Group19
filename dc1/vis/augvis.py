@@ -43,9 +43,9 @@ def visualize_augmentation(augmented:ConcatDataset, nrows=4):
     """
     Visualize the augmentatative transformations.
     """
-    ncols = len(augmented.cummulative_sizes)
-    samp = np.random.randint(0, augmented.cummulative_sizes[0], size = nrows)
-    augsamp = [[augmented.datasets[offset][samp[i]][0][0]
+    ncols = len(augmented) // augmented.rawlen
+    samp = np.random.randint(0, augmented.rawlen, size = nrows)
+    augsamp = [[augmented[offset*augmented.rawlen + samp[i]][0][0].to('cpu')
                for offset in range(ncols)]
                for i in range(nrows)]
     plot(augsamp)

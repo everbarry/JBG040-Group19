@@ -59,30 +59,30 @@ class AugImageDataset(ImageDataset):
     """
 
     def __init__(self, x: Path, y: Path,
-                 transforms: List[Callable] = None,
+                 transform: List[Callable] = None,
                  augmentation_iter: int = 5,
                  device: str = 'cpu') -> None:
-
-        # Define your transformations
-        self.transforms = None
-        if not transforms:
-            self.transforms = [transforms.Compose([
-                transforms.RandomAffine(degrees=5, scale=(0.95, 1.05)),
-            ])] * augmentation_iter
-            
         # Create a PyTorch dataset from the X and y arrays
         super().__init__(x,y)
+        if transform is None:
+            self.transform = [transforms.Compose([
+                transforms.RandomAffine(degrees=5, scale=(0.95, 1.05)),
+            ])] * augmentation_iter
+
+        print(len(self.transform))
+         
         self.rawlen = len(self.targets)
+        self.targets = np.tile(self.targets, augmentation_iter)
         self.device = device
 
 
     def __len__(self) -> int:
-        return len(self.targets) * len(self.transforms)
+        return len(self.targets)
 
     def __getitem__(self, idx: int) -> Tuple[torch.Tensor, np.ndarray]:
         tidx = idx // self.rawlen
         idx = idx % self.rawlen
-        transform = self.transforms[tidx]
+        transform = self.transform[tidx]
         label = self.targets[idx]
 
         image = torch.tensor(self.imgs[idx] / 255).float().to(self.device)
@@ -90,9 +90,6 @@ class AugImageDataset(ImageDataset):
             image = transform(image)
 
         return image, label
-
-
-
 
 
 
@@ -135,31 +132,26 @@ def gen_augmented_dataset(X_path:Path,
 
 
 if __name__ == "__main__":
-    train_dataset = AugImageDataset(
-        Path("../data/X_train.npy"), Path("../data/Y_train.npy"))
-
-    print(train_dataset.targets)
-    
-#     cwd = os.getcwd()
-#     if path.exists(path.join(cwd + "data/")):
-#         print("Data directory exists, files may be overwritten!")
-#     else:
-#         os.mkdir(path.join(cwd, "../data/"))
-#     ### Load labels
-#     train_y = load_numpy_arr_from_url(
-#         url="https://surfdrive.surf.nl/files/index.php/s/i6MvQ8nqoiQ9Tci/download"
-#     )
-#     np.save("../data/Y_train.npy", train_y)
-#     test_y = load_numpy_arr_from_url(
-#         url="https://surfdrive.surf.nl/files/index.php/s/wLXiOjVAW4AWlXY/download"
-#     )
-#     np.save("../data/Y_test.npy", test_y)
-#     ### Load data
-#     train_x = load_numpy_arr_from_url(
-#         url="https://surfdrive.surf.nl/files/index.php/s/4rwSf9SYO1ydGtK/download"
-#     )
-#     np.save("../data/X_train.npy", train_x)
-#     test_x = load_numpy_arr_from_url(
-#         url="https://surfdrive.surf.nl/files/index.php/s/dvY2LpvFo6dHef0/download"
-#     )
-#     np.save("../data/X_test.npy", test_x)
+    cwd = os.getcwd()
+    if path.exists(path.join(cwd + "data/")):
+        print("Data directory exists, files may be overwritten!")
+    else:
+        os.mkdir(path.join(cwd, "../data/"))
+    ### Load labels
+    train_y = load_numpy_arr_from_url(
+        url="https://surfdrive.surf.nl/files/index.php/s/i6MvQ8nqoiQ9Tci/download"
+    )
+    np.save("../data/Y_train.npy", train_y)
+    test_y = load_numpy_arr_from_url(
+        url="https://surfdrive.surf.nl/files/index.php/s/wLXiOjVAW4AWlXY/download"
+    )
+    np.save("../data/Y_test.npy", test_y)
+    ### Load data
+    train_x = load_numpy_arr_from_url(
+        url="https://surfdrive.surf.nl/files/index.php/s/4rwSf9SYO1ydGtK/download"
+    )
+    np.save("../data/X_train.npy", train_x)
+    test_x = load_numpy_arr_from_url(
+        url="https://surfdrive.surf.nl/files/index.php/s/dvY2LpvFo6dHef0/download"
+    )
+    np.save("../data/X_test.npy", test_x)
