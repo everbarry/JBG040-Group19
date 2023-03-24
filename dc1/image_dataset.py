@@ -19,7 +19,7 @@ class ImageDataset(Dataset):
     to pass the data through the neural network and apply weights).
     """
 
-    def __init__(self, x: Path, y: Path, transform=None) -> None:
+    def __init__(self, x: Path, y: Path, transform:Callable = None) -> None:
         # Target labels
         self.targets = ImageDataset.load_numpy_arr_from_npy(y)
         # Images
@@ -53,29 +53,47 @@ class ImageDataset(Dataset):
 
 
 
-class AugImageDataset(ConcatDataset):
+class AugImageDataset(ImageDataset):
     """
     Used for lazy data augmentation with while using the ImageDataset
     """
 
     def __init__(self, x: Path, y: Path,
-                 augmentation_iter:int = 5,
-                 transform=None) -> None:
+                 transforms: List[Callable] = None,
+                 augmentation_iter: int = 5,
+                 device: str = 'cpu') -> None:
 
         # Define your transformations
-        if not transform:
-            transform = transforms.Compose([
+        self.transforms = None
+        if not transforms:
+            self.transforms = [transforms.Compose([
                 transforms.RandomAffine(degrees=5, scale=(0.95, 1.05)),
-            ])
+            ])] * augmentation_iter
             
         # Create a PyTorch dataset from the X and y arrays
-        super().__init__(
-            [ImageDataset(x, y, transform = tr)
-             for tr in [None] + [transform] * augmentation_iter ])
+        super().__init__(x,y)
+        self.rawlen = len(self.targets)
+        self.device = device
 
-        self.transform = transform
-        self.targets = np.concatenate(
-            [dataset.targets for dataset in self.datasets])
+
+    def __len__(self) -> int:
+        return len(self.targets) * len(self.transforms)
+
+    def __getitem__(self, idx: int) -> Tuple[torch.Tensor, np.ndarray]:
+        tidx = idx // self.rawlen
+        idx = idx % self.rawlen
+        transform = self.transforms[tidx]
+        label = self.targets[idx]
+
+        image = torch.tensor(self.imgs[idx] / 255).float().to(self.device)
+        if transform:
+            image = transform(image)
+
+        return image, label
+
+
+
+
 
 
 def load_numpy_arr_from_url(url: str) -> np.ndarray:
