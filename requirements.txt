@@ -15,10 +15,10 @@ python-dateutil==2.8.2
 requests==2.28.1
 six==1.16.0
 torch==1.13.1
-torchviz==0.0.2
 torchsummary==1.5.1
 tqdm==4.64.1
 types-requests==2.28.11.7
 types-setuptools==65.6.0.2
 types-tqdm==4.64.1
 urllib3==1.26.13
+scikit-learn==1.2.1

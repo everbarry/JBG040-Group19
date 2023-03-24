@@ -2,10 +2,9 @@
 from batch_sampler import BatchSampler
 from image_dataset import ImageDataset, AugImageDataset
 from net import Net
-from train_test import train_model, test_model, gen_confusion
+from train_test import train_model, test_model
 
 # Visualizations
-from vis.modelvis import modelvis
 from vis.augvis import visualize_augmentation
 
 # Torch imports
@@ -23,13 +22,38 @@ import plotext  # type: ignore
 from datetime import datetime
 from pathlib import Path
 from typing import List
+from sklearn.metrics import confusion_matrix
+
+
+def checkpoint(model: Net) -> str:
+    """
+    Checkpoint the model and return the filename of the checkpoints.
+    """
+    now = datetime.now()
+    if not Path("model_weights/").exists():
+        os.mkdir(Path("model_weights/"))
+    filename = f"model_weights/model_{now.month:02}_{now.day:02}_{now.hour}_{now.minute:02}.txt"
+    torch.save(model.state_dict(), filename)
+    return filename
+
+
+def resume(model: Net, filename: str) -> None:
+    model.load_state_dict(torch.load(filename))
 
 
 def main(args: argparse.Namespace, activeloop: bool = True) -> None:
 
     # Load the train and test data set
-    train_dataset = AugImageDataset(Path("../data/X_train.npy"), Path("../data/Y_train.npy"))
-    test_dataset = AugImageDataset(Path("../data/X_test.npy"), Path("../data/Y_test.npy"))
+    if args.augiter > 1:
+        train_dataset = AugImageDataset(
+            Path("../data/X_train.npy"), Path("../data/Y_train.npy"),
+            augmentation_iter=args.augiter)
+    else:
+        train_dataset = ImageDataset(
+            Path("../data/X_train.npy"), Path("../data/Y_train.npy"))
+
+    test_dataset = ImageDataset(
+        Path("../data/X_test.npy"), Path("../data/Y_test.npy"))
 
     # Visualize dataset
     if args.augvis:
@@ -71,11 +95,6 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
         # Creating a summary of our model and its layers:
         summary(model, (1, 128, 128), device=device)
 
-    # Show a pgf of model architecture in the browser
-    if  args.modelvis:
-        modelvis(model, args, device=device)
-
-
     # Lets now train and test our model for multiple epochs:
     train_sampler = BatchSampler(
         batch_size=batch_size, dataset=train_dataset, balanced=args.balanced_batches
@@ -90,6 +109,11 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
     total_tr = 0
     correct_test = 0
     total_test = 0
+    early_stop_thresh = args.early_stop_thresh
+    best_checkpoint = ""
+    best_accuracy = -1
+    best_epoch = -1
+    y_true, y_pred = [], []
     for e in range(n_epochs):
         if activeloop:
 
@@ -102,7 +126,11 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
             correct_tr += train_model(model, train_sampler, optimizer, loss_function, device)[1]
             total_tr += train_model(model, train_sampler, optimizer, loss_function, device)[2]
             # Testing:
-            losses = test_model(model, test_sampler, loss_function, device)[0]
+            losses, _, _, ys = test_model(model, test_sampler, loss_function, device)
+            y_t, y_p = [item for sublist in ys[0] for item in sublist], [item for sublist in ys[1] for item in sublist]
+            y_true.append(y_t)
+            y_pred.append(y_p)
+
 
             # # Calculating and printing statistics:
             mean_loss = sum(losses) / len(losses)
@@ -110,41 +138,44 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
             print(f"\nEpoch {e + 1} testing done, loss on test set: {mean_loss}\n")
             correct_test += test_model(model, test_sampler, loss_function, device)[1]
             total_test += test_model(model, test_sampler, loss_function, device)[2]
+            acc = test_model(model, test_sampler, loss_function, device)[1]/ test_model(model, test_sampler, loss_function, device)[2]
+            if acc > best_accuracy:
+                best_accuracy = acc
+                best_epoch = e
+                best_checkpoint = checkpoint(model)
+            elif e - best_epoch > early_stop_thresh:
+                print("Early stopped training at epoch %d" % e)
+                n_epochs = e + 1
+                break  # terminate the training loop
 
-            gen_confusion(model, test_sampler, device)
+            ### Plotting during training
+            plotext.clf()
+            plotext.scatter(mean_losses_train, label="train")
+            plotext.scatter(mean_losses_test, label="test")
+            plotext.title("Train and test loss")
 
-            if args.plot:
-                 plotext.clf()
-                 plotext.scatter(mean_losses_train, label="train")
-                 plotext.scatter(mean_losses_test, label="test")
-                 plotext.title("Train and test loss")
- 
-                 plotext.xticks([i for i in range(len(mean_losses_train) + 1)])
- 
-                 plotext.show()
+            plotext.xticks([i for i in range(len(mean_losses_train) + 1)])
 
+            plotext.show()
 
-    # Accuracy statistics after training
+    resume(model, best_checkpoint)
     print(f'correct: {correct_tr}/{total_tr}\nacc: {correct_tr/total_tr:.2f}')
     print(f'correct: {correct_test}/{total_test}\nacc: {correct_test / total_test:.2f}')
-
     # retrieve current time to label artifacts
     now = datetime.now()
-    # check if model_weights/ subdir exists
-    if not Path("model_weights/").exists():
-        os.mkdir(Path("model_weights/"))
-    
-    # Saving the model
-    torch.save(model.state_dict(), f"model_weights/model_{now.month:02}_{now.day:02}_{now.hour}_{now.minute:02}.txt")
-    
+
+    # confusion matrix
+    y_true, y_pred = [item for sublist in y_true for item in sublist], [item for sublist in y_pred for item in sublist]
+    print(confusion_matrix(y_true, y_pred))
+
     # Create plot of losses
     figure(figsize=(9, 10), dpi=80)
     fig, (ax1, ax2) = plt.subplots(2, sharex=True)
-    
+
     ax1.plot(range(1, 1 + n_epochs), [x.detach().cpu() for x in mean_losses_train], label="Train", color="blue")
     ax2.plot(range(1, 1 + n_epochs), [x.detach().cpu() for x in mean_losses_test], label="Test", color="red")
     fig.legend()
-    
+
     # Check if /artifacts/ subdir exists
     if not Path("artifacts/").exists():
         os.mkdir(Path("artifacts/"))
@@ -195,6 +226,18 @@ if __name__ == "__main__":
         help="Augmentation visualization",
         default=False,
         action="store_true",
+    )
+    parser.add_argument(
+        "-a", "--augiter",
+        help="Augmentation itterations. Expands Training data set x fold.",
+        default=5,
+        type=int
+    )
+    parser.add_argument(
+        "-s", "--early_stop_thresh",
+        help="Epoch threshhold for early stopping",
+        default=5,
+        type=int
     )
 
 

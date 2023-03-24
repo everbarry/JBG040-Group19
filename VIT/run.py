@@ -10,8 +10,9 @@ from torchsummary import summary
 from torch.utils.data import DataLoader
 # import modules
 from dataset import XrayDataset
-from model import VisionTransformer, CosineWarmupScheduler
-from train_test import trainLoop, testLoop, visAttention
+from model import VisionTransformer
+from train_test import trainLoop, testLoop
+from sklearn.metrics import confusion_matrix
 
 
 def initEnv(random_seed=19):
@@ -80,7 +81,6 @@ def parser():
     parser.add_argument('-b', '--n-batches', help='specify number of batches to split the dataset into', default=64, type=int)
     parser.add_argument('-s', '--model-summary', help='if specified model summary will be displayed', action='store_true')
     parser.add_argument('-v', '--val', help='if specified load best weights, validate model and display visualizations', action='store_true')
-    parser.add_argument('-ws', '--warmup-scheduler', help='specify the number of batches of warmup for the learning rate scheduler', default=30, type=int)
     # return arguments
     return parser.parse_args()
 
@@ -103,9 +103,7 @@ def main():
     # init model
     model = VisionTransformer(input_size, [args.patch_size,args.patch_size], args.hidden_dim, num_heads, output_dim)
     model = model.to(device)
-    # criterion = CrossEntropyLoss()
-    pos_weight = torch.tensor([0.1494, 0.1400, 0.1782, 0.3573, 0.0966, 0.0785]).to(device)  # All weights are equal to 1
-    criterion = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight)
+    criterion = CrossEntropyLoss()
     if args.optimizer == 'Adam':
         optimizer = Adam(model.parameters(),lr=args.learning_rate)
     elif args.optimizer == 'SGD':
@@ -119,7 +117,6 @@ def main():
     else:
         print('invalid optimizer')
         quit()
-    scheduler = CosineWarmupScheduler(optimizer=optimizer, warmup=args.warmup_scheduler, max_iters=2000)
     if args.model_summary:
         summary(model, tuple(input_size), device=str(device))
 
@@ -130,9 +127,12 @@ def main():
         print('Loaded pretrained weights...')
         #visAttention(device, optimizer, model)
         results = testLoop(device, model, criterion, optimizer, test_loader)
+        print(results[-1])
+        y_true, y_pred = [item for sublist in results[-1][0] for item in sublist], [item for sublist in results[-1][1] for item in sublist]
+        print(confusion_matrix(y_true, y_pred))
         return
         # train & test model
-    train_accuracy = trainLoop(device, optimizer, scheduler, criterion, train_loader, model, args.epochs)
+    train_accuracy = trainLoop(device, optimizer, criterion, train_loader, model, args.epochs)
     results = testLoop(device, model, criterion, optimizer, test_loader)
 
 if __name__ == '__main__':

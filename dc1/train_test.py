@@ -1,12 +1,16 @@
 from tqdm import tqdm
-
 import torch
-import numpy as np
-from sklearn.metrics import confusion_matrix
-
 from net import Net
 from batch_sampler import BatchSampler
 from typing import Callable, List
+
+
+def checkpoint(model, filename):
+    torch.save(model.state_dict(), filename)
+
+
+def resume(model, filename):
+    model.load_state_dict(torch.load(filename))
 
 
 def train_model(
@@ -23,6 +27,7 @@ def train_model(
     # Feed all the batches one by one:
     correct = 0
     total = 0
+
     for batch in tqdm(train_sampler):
         # Get a batch:
         x, y = batch
@@ -59,6 +64,7 @@ def test_model(
     # We need to make sure we do not update our model based on the test data:
     correct = 0
     total = 0
+    y_true, y_pred = [], []
     with torch.no_grad():
         for (x, y) in tqdm(test_sampler):
             # Making sure our samples are stored on the same device as our model:
@@ -70,32 +76,8 @@ def test_model(
             _, predicted = torch.max(prediction, 1)
             correct += (predicted == y).sum().item()
             total += len(y)
+            y_true.append(y.cpu())
+            y_pred.append(predicted.cpu())
 
     print(f'correct: {correct}/{total}\nacc: {correct / total:.2f}')
-    return losses, correct, total
-
-
-# TODO: generate confusion matrix for classes.
-def gen_confusion(
-        model: Net,
-        test_sampler: BatchSampler,
-        device: str,
-) -> List[torch.Tensor]:
-    model.eval()
-    predy = []
-    truey = []
-
-    with torch.no_grad():
-        for (x, y) in tqdm(test_sampler):
-            truey = np.append(truey, y)
-            # Making sure our samples are stored on the same device as our model:
-            x = x.to(device)
-            y = y.to(device)
-            prediction = model.forward(x)
-            _, predicted = torch.max(prediction, 1)
-            predy = np.append(predy, predicted.to('cpu'))
-
-    result = confusion_matrix(truey, predy)
-    print(result)
-    return result
-
+    return losses, correct, total, (y_true, y_pred)
