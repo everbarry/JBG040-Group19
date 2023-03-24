@@ -72,7 +72,7 @@ class AugImageDataset(ImageDataset):
         print(len(self.transform))
          
         self.rawlen = len(self.targets)
-        self.targets = np.tile(self.targets, augmentation_iter)
+        self.targets = np.tile(self.targets, len(self.transform))
         self.device = device
 
 
