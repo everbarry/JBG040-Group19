@@ -1,0 +1,30 @@
+
+  0%|                                                                                                                                                                | 0/1 [00:02<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/barry/Desktop/uni/dbl2/JBG040-Group19/final/main.py", line 204, in <module>
+    main()
+  File "/home/barry/Desktop/uni/dbl2/JBG040-Group19/final/main.py", line 198, in main
+    best_model = trainModel(args.model, device, args.drop_rate, args.optimizer, args.learning_rate, args.scheduler, args.criterion, weights, args.epochs, train_loader, test_loader, args.early_stop_thresh)
+  File "/home/barry/Desktop/uni/dbl2/JBG040-Group19/final/main.py", line 174, in trainModel
+    best_model = train_loop(epochs, train_loader, device, optimizer, model, criterion, test_loader, early_stop_thresh, fast=False)
+  File "/home/barry/Desktop/uni/dbl2/JBG040-Group19/final/train_test.py", line 63, in train_loop
+    output = model(X)             # forward pass
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 549, in forward
+    x = self.forward_features(x)
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 538, in forward_features
+    x = self.blocks(x)
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/nn/modules/container.py", line 204, in forward
+    input = module(input)
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 268, in forward
+    x = x + self.drop_path1(self.ls1(self.attn(self.norm1(x))))
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 220, in forward
+    attn = (q @ k.transpose(-2, -1)) * self.scale
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 482.00 MiB (GPU 0; 5.80 GiB total capacity; 3.58 GiB already allocated; 440.62 MiB free; 3.93 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF

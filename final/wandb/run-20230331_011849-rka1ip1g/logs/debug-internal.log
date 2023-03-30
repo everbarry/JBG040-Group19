@@ -1,0 +1,645 @@
+2023-03-31 01:18:49,728 INFO    StreamThr :81859 [internal.py:wandb_internal():87] W&B internal server running at pid: 81859, started at: 2023-03-31 01:18:49.727662
+2023-03-31 01:18:49,729 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status
+2023-03-31 01:18:49,731 INFO    WriterThread:81859 [datastore.py:open_for_write():85] open: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/run-rka1ip1g.wandb
+2023-03-31 01:18:49,731 DEBUG   SenderThread:81859 [sender.py:send():336] send: header
+2023-03-31 01:18:49,732 DEBUG   SenderThread:81859 [sender.py:send():336] send: run
+2023-03-31 01:18:50,165 INFO    SenderThread:81859 [dir_watcher.py:__init__():219] watching files in: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files
+2023-03-31 01:18:50,165 INFO    SenderThread:81859 [sender.py:_start_run_threads():1078] run started: rka1ip1g with start time 1680218329.726827
+2023-03-31 01:18:50,166 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: summary_record
+2023-03-31 01:18:50,166 INFO    SenderThread:81859 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-03-31 01:18:50,167 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: check_version
+2023-03-31 01:18:50,167 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: check_version
+2023-03-31 01:18:50,237 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: run_start
+2023-03-31 01:18:50,240 DEBUG   HandlerThread:81859 [system_info.py:__init__():31] System info init
+2023-03-31 01:18:50,240 DEBUG   HandlerThread:81859 [system_info.py:__init__():46] System info init done
+2023-03-31 01:18:50,241 INFO    HandlerThread:81859 [system_monitor.py:start():183] Starting system monitor
+2023-03-31 01:18:50,241 INFO    SystemMonitor:81859 [system_monitor.py:_start():147] Starting system asset monitoring threads
+2023-03-31 01:18:50,241 INFO    HandlerThread:81859 [system_monitor.py:probe():204] Collecting system info
+2023-03-31 01:18:50,242 INFO    SystemMonitor:81859 [interfaces.py:start():187] Started cpu monitoring
+2023-03-31 01:18:50,242 INFO    SystemMonitor:81859 [interfaces.py:start():187] Started disk monitoring
+2023-03-31 01:18:50,243 INFO    SystemMonitor:81859 [interfaces.py:start():187] Started gpu monitoring
+2023-03-31 01:18:50,244 INFO    SystemMonitor:81859 [interfaces.py:start():187] Started memory monitoring
+2023-03-31 01:18:50,244 INFO    SystemMonitor:81859 [interfaces.py:start():187] Started network monitoring
+2023-03-31 01:18:50,254 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:18:50,254 DEBUG   HandlerThread:81859 [system_info.py:probe():195] Probing system
+2023-03-31 01:18:50,255 DEBUG   HandlerThread:81859 [system_info.py:_probe_git():180] Probing git
+2023-03-31 01:18:50,259 DEBUG   HandlerThread:81859 [system_info.py:_probe_git():188] Probing git done
+2023-03-31 01:18:50,259 DEBUG   HandlerThread:81859 [system_info.py:probe():240] Probing system done
+2023-03-31 01:18:50,259 DEBUG   HandlerThread:81859 [system_monitor.py:probe():213] {'os': 'Linux-6.2.8-arch1-1-x86_64-with-glibc2.37', 'python': '3.10.10', 'heartbeatAt': '2023-03-30T23:18:50.254647', 'startedAt': '2023-03-30T23:18:49.721190', 'docker': None, 'cuda': None, 'args': ('-t', '-e', '50'), 'state': 'running', 'program': '/home/barry/Desktop/uni/dbl2/JBG040-Group19/final/main.py', 'codePath': 'final/main.py', 'git': {'remote': 'https://github.com/everbarry/JBG040-Group19.git', 'commit': 'd472a7d088339cde823c37f8a8011d3b66e08c84'}, 'email': 'alessandro.preiti@protonmail.com', 'root': '/home/barry/Desktop/uni/dbl2/JBG040-Group19', 'host': 'Arch', 'username': 'barry', 'executable': '/home/barry/anaconda3/envs/dbl2/bin/python3', 'cpu_count': 6, 'cpu_count_logical': 12, 'cpu_freq': {'current': 3198.946916666667, 'min': 800.0, 'max': 5000.0}, 'cpu_freq_per_core': [{'current': 3279.507, 'min': 800.0, 'max': 5000.0}, {'current': 3293.575, 'min': 800.0, 'max': 5000.0}, {'current': 3265.336, 'min': 800.0, 'max': 5000.0}, {'current': 3277.008, 'min': 800.0, 'max': 5000.0}, {'current': 3200.0, 'min': 800.0, 'max': 5000.0}, {'current': 3260.923, 'min': 800.0, 'max': 5000.0}, {'current': 2600.0, 'min': 800.0, 'max': 5000.0}, {'current': 3239.668, 'min': 800.0, 'max': 5000.0}, {'current': 3256.314, 'min': 800.0, 'max': 5000.0}, {'current': 3204.331, 'min': 800.0, 'max': 5000.0}, {'current': 3260.924, 'min': 800.0, 'max': 5000.0}, {'current': 3276.139, 'min': 800.0, 'max': 5000.0}], 'disk': {'total': 465.8809127807617, 'used': 430.05595779418945}, 'gpu': 'NVIDIA GeForce GTX 1660 Ti', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce GTX 1660 Ti', 'memory_total': 6442450944}], 'memory': {'total': 15.408565521240234}}
+2023-03-31 01:18:50,260 INFO    HandlerThread:81859 [system_monitor.py:probe():214] Finished collecting system info
+2023-03-31 01:18:50,260 INFO    HandlerThread:81859 [system_monitor.py:probe():217] Publishing system info
+2023-03-31 01:18:50,260 DEBUG   HandlerThread:81859 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-03-31 01:18:50,260 DEBUG   HandlerThread:81859 [system_info.py:_save_pip():67] Saving pip packages done
+2023-03-31 01:18:50,260 INFO    HandlerThread:81859 [system_monitor.py:probe():219] Finished publishing system info
+2023-03-31 01:18:50,264 DEBUG   SenderThread:81859 [sender.py:send():336] send: files
+2023-03-31 01:18:50,264 INFO    SenderThread:81859 [sender.py:_save_file():1332] saving file wandb-metadata.json with policy now
+2023-03-31 01:18:50,267 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:18:50,268 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:18:50,457 DEBUG   SenderThread:81859 [sender.py:send():336] send: telemetry
+2023-03-31 01:18:50,888 INFO    wandb-upload_0:81859 [upload_job.py:push():138] Uploaded file /tmp/tmpzej2wrx7wandb/ox12x4p6-wandb-metadata.json
+2023-03-31 01:18:51,167 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_created():278] file/dir created: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/requirements.txt
+2023-03-31 01:18:51,167 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_created():278] file/dir created: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/wandb-metadata.json
+2023-03-31 01:18:51,167 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_created():278] file/dir created: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/wandb-summary.json
+2023-03-31 01:18:52,166 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_created():278] file/dir created: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:18:52,256 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:18:54,166 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:18:54,258 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:18:54,972 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:18:56,167 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:18:56,260 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:18:58,167 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:18:58,262 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:00,103 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:19:00,167 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:00,264 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:02,168 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:02,266 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:04,168 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:04,268 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:05,145 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:19:05,268 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:19:05,268 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:19:06,169 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:06,270 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:08,169 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:08,273 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:10,169 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:10,275 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:10,592 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:19:12,170 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:12,276 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:14,170 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:14,279 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:15,945 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:19:16,171 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:16,284 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:18,171 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:18,286 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:20,171 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:20,268 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:19:20,268 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:19:20,329 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:21,016 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:19:22,172 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/config.yaml
+2023-03-31 01:19:22,172 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:22,336 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:24,173 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:24,338 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:26,173 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:26,340 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:26,820 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:19:28,174 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:28,342 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:30,174 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:30,344 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:31,852 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:19:32,175 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:32,346 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:34,175 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:34,349 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:35,268 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:19:35,268 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:19:36,175 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:36,350 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:37,030 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:19:38,176 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:38,352 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:40,176 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:40,357 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:42,177 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:42,215 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:19:42,359 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:44,177 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:44,364 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:46,178 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:46,365 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:47,531 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:19:48,178 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:48,367 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:50,179 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:50,244 DEBUG   SystemMonitor:81859 [system_monitor.py:_start():161] Starting system metrics aggregation loop
+2023-03-31 01:19:50,245 DEBUG   SenderThread:81859 [sender.py:send():336] send: stats
+2023-03-31 01:19:50,268 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:19:50,268 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:19:50,397 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:52,179 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:52,399 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:52,549 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:19:54,180 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:54,401 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:56,180 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:56,403 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:19:57,632 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:19:58,181 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:19:58,405 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:00,181 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:00,406 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:02,182 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:02,408 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:02,917 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:20:04,182 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:04,410 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:05,268 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:20:05,268 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:20:06,182 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:06,415 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:08,183 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:08,383 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:20:08,417 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:10,183 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:10,419 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:12,184 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:12,420 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:13,712 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:20:14,184 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:14,422 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:16,185 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:16,424 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:18,185 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:18,432 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:19,262 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:20:20,186 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:20,246 DEBUG   SenderThread:81859 [sender.py:send():336] send: stats
+2023-03-31 01:20:20,268 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:20:20,268 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:20:20,471 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:22,186 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:22,473 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:24,187 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:24,386 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:20:24,475 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:26,187 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:26,477 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:28,188 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:28,482 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:29,514 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:20:30,189 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:30,489 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:32,189 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:32,491 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:34,189 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:34,494 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:35,053 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:20:35,268 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:20:35,268 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:20:36,190 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:36,496 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:38,190 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:38,498 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:40,191 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:40,446 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:20:40,500 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:42,191 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:42,506 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:44,192 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:44,508 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:45,491 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:20:46,193 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:46,510 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:48,193 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:48,522 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:50,194 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:50,246 DEBUG   SenderThread:81859 [sender.py:send():336] send: stats
+2023-03-31 01:20:50,269 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:20:50,270 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:20:50,560 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:50,575 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:20:52,194 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:52,562 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:54,195 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:54,564 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:55,614 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:20:56,196 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:56,566 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:20:58,197 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:20:58,578 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:00,197 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:00,580 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:00,713 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:21:02,198 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:02,582 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:04,199 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:04,584 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:05,268 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:21:05,269 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:21:05,807 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:21:06,200 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:06,592 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:08,200 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:08,594 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:10,201 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:10,597 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:10,905 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:21:12,202 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:12,599 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:14,202 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:14,601 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:15,931 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:21:16,067 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: partial_history
+2023-03-31 01:21:16,068 DEBUG   SenderThread:81859 [sender.py:send():336] send: history
+2023-03-31 01:21:16,068 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: summary_record
+2023-03-31 01:21:16,069 INFO    SenderThread:81859 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-03-31 01:21:16,203 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:16,203 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/wandb-summary.json
+2023-03-31 01:21:16,604 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:18,204 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:18,607 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:20,204 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:20,247 DEBUG   SenderThread:81859 [sender.py:send():336] send: stats
+2023-03-31 01:21:20,269 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:21:20,269 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:21:20,640 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:21,459 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:21:22,204 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:22,641 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:24,205 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:24,643 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:26,205 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:26,645 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:26,772 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:21:28,206 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:28,652 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:30,206 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:30,655 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:32,207 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:32,347 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:21:32,657 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:34,207 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:34,658 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:35,269 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:21:35,269 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:21:36,208 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:36,662 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:37,819 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:21:38,208 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:38,664 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:40,209 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:40,666 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:42,209 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:42,668 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:43,031 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:21:44,210 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:44,670 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:46,210 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:46,672 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:48,211 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:48,573 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:21:48,673 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:50,211 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:50,247 DEBUG   SenderThread:81859 [sender.py:send():336] send: stats
+2023-03-31 01:21:50,269 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:21:50,269 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:21:50,708 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:52,211 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:52,710 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:54,151 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:21:54,212 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:54,715 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:56,212 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:56,717 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:58,213 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:21:58,719 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:21:59,963 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:22:00,213 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:00,720 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:02,214 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:02,722 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:04,214 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:04,724 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:05,269 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:22:05,269 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:22:05,453 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:22:06,215 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:06,727 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:08,215 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:08,731 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:10,216 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:10,736 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:10,844 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:22:12,216 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:12,737 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:14,217 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:14,739 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:16,211 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:22:16,217 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:16,741 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:18,218 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:18,743 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:20,218 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:20,248 DEBUG   SenderThread:81859 [sender.py:send():336] send: stats
+2023-03-31 01:22:20,269 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:22:20,269 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:22:20,777 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:21,478 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:22:22,219 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:22,782 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:24,219 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:24,784 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:26,220 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:26,786 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:26,836 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:22:28,220 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:28,788 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:30,221 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:30,790 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:32,029 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:22:32,221 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:32,792 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:34,222 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:34,794 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:35,269 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:22:35,270 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:22:36,222 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:36,795 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:37,448 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:22:38,223 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:38,797 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:40,223 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:40,799 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:42,224 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:42,801 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:42,861 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:22:44,224 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:44,803 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:46,225 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:46,805 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:48,225 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:48,439 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:22:48,807 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:50,226 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:50,248 DEBUG   SenderThread:81859 [sender.py:send():336] send: stats
+2023-03-31 01:22:50,269 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:22:50,269 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:22:50,836 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:52,226 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:52,838 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:54,002 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:22:54,226 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:54,839 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:56,227 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:56,841 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:58,227 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:22:58,843 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:22:59,488 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:23:00,228 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:00,845 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:02,228 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:02,847 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:04,229 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:04,852 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:04,898 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:23:05,269 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:23:05,270 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:23:06,229 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:06,857 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:08,230 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:08,861 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:10,074 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:23:10,231 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:10,863 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:12,231 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:12,865 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:14,231 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:14,867 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:15,268 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:23:16,232 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:16,869 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:18,232 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:18,873 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:20,233 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:20,249 DEBUG   SenderThread:81859 [sender.py:send():336] send: stats
+2023-03-31 01:23:20,269 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:23:20,269 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:23:20,440 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:23:20,902 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:22,233 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:22,904 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:24,234 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:24,905 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:25,575 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:23:26,234 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:26,914 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:28,235 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:28,916 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:30,235 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:30,763 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:23:30,918 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:32,236 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:32,920 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:34,236 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:34,922 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:35,269 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:23:35,270 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:23:36,032 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:23:36,236 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:36,923 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:38,237 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:38,925 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:40,237 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:40,927 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:41,051 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:23:42,238 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:42,929 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:44,238 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:44,973 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:46,173 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:23:46,239 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:46,975 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:48,239 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:48,977 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:50,240 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:50,250 DEBUG   SenderThread:81859 [sender.py:send():336] send: stats
+2023-03-31 01:23:50,270 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:23:50,278 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:23:51,011 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:51,182 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:23:52,240 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:53,013 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:54,241 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:55,015 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:56,197 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:23:56,241 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:57,017 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:23:58,242 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:23:59,019 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:24:00,243 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:01,021 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:24:01,257 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:24:02,243 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:03,027 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:24:04,244 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:05,029 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:24:05,269 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:24:05,270 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:24:06,244 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:06,307 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:24:07,032 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:24:08,245 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:09,034 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:24:10,245 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:11,036 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:24:11,353 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:24:12,246 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:13,038 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:24:14,246 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:15,044 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:24:16,247 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:16,462 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:24:16,772 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: partial_history
+2023-03-31 01:24:16,773 DEBUG   SenderThread:81859 [sender.py:send():336] send: history
+2023-03-31 01:24:16,774 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: summary_record
+2023-03-31 01:24:16,774 INFO    SenderThread:81859 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-03-31 01:24:17,046 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:24:17,247 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/wandb-summary.json
+2023-03-31 01:24:18,247 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:19,048 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:24:19,248 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:20,248 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:20,250 DEBUG   SenderThread:81859 [sender.py:send():336] send: stats
+2023-03-31 01:24:20,270 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-31 01:24:20,270 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: stop_status
+2023-03-31 01:24:21,081 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:24:21,598 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:24:22,248 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:23,083 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:24:24,249 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:25,088 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:24:26,249 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:26,695 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:24:27,090 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:24:28,249 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:29,093 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:24:30,250 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:31,095 ERROR   gpu       :81859 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-03-31 01:24:31,828 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:24:32,250 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:33,091 DEBUG   SenderThread:81859 [sender.py:send():336] send: exit
+2023-03-31 01:24:33,091 INFO    SenderThread:81859 [sender.py:send_exit():559] handling exit code: 255
+2023-03-31 01:24:33,092 INFO    SenderThread:81859 [sender.py:send_exit():561] handling runtime: 342
+2023-03-31 01:24:33,092 INFO    SenderThread:81859 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-03-31 01:24:33,092 INFO    SenderThread:81859 [sender.py:send_exit():567] send defer
+2023-03-31 01:24:33,092 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: defer
+2023-03-31 01:24:33,092 INFO    HandlerThread:81859 [handler.py:handle_request_defer():170] handle defer: 0
+2023-03-31 01:24:33,092 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: defer
+2023-03-31 01:24:33,092 INFO    SenderThread:81859 [sender.py:send_request_defer():583] handle sender defer: 0
+2023-03-31 01:24:33,093 INFO    SenderThread:81859 [sender.py:transition_state():587] send defer: 1
+2023-03-31 01:24:33,093 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: defer
+2023-03-31 01:24:33,093 INFO    HandlerThread:81859 [handler.py:handle_request_defer():170] handle defer: 1
+2023-03-31 01:24:33,093 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: defer
+2023-03-31 01:24:33,093 INFO    SenderThread:81859 [sender.py:send_request_defer():583] handle sender defer: 1
+2023-03-31 01:24:33,093 INFO    SenderThread:81859 [sender.py:transition_state():587] send defer: 2
+2023-03-31 01:24:33,093 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: defer
+2023-03-31 01:24:33,093 INFO    HandlerThread:81859 [handler.py:handle_request_defer():170] handle defer: 2
+2023-03-31 01:24:33,093 INFO    HandlerThread:81859 [system_monitor.py:finish():193] Stopping system monitor
+2023-03-31 01:24:33,094 DEBUG   SystemMonitor:81859 [system_monitor.py:_start():168] Finished system metrics aggregation loop
+2023-03-31 01:24:33,094 DEBUG   SystemMonitor:81859 [system_monitor.py:_start():172] Publishing last batch of metrics
+2023-03-31 01:24:33,094 INFO    HandlerThread:81859 [interfaces.py:finish():199] Joined cpu monitor
+2023-03-31 01:24:33,095 INFO    HandlerThread:81859 [interfaces.py:finish():199] Joined disk monitor
+2023-03-31 01:24:33,118 INFO    HandlerThread:81859 [interfaces.py:finish():199] Joined gpu monitor
+2023-03-31 01:24:33,118 INFO    HandlerThread:81859 [interfaces.py:finish():199] Joined memory monitor
+2023-03-31 01:24:33,118 INFO    HandlerThread:81859 [interfaces.py:finish():199] Joined network monitor
+2023-03-31 01:24:33,119 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: defer
+2023-03-31 01:24:33,119 INFO    SenderThread:81859 [sender.py:send_request_defer():583] handle sender defer: 2
+2023-03-31 01:24:33,119 INFO    SenderThread:81859 [sender.py:transition_state():587] send defer: 3
+2023-03-31 01:24:33,119 DEBUG   SenderThread:81859 [sender.py:send():336] send: stats
+2023-03-31 01:24:33,119 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: defer
+2023-03-31 01:24:33,119 INFO    HandlerThread:81859 [handler.py:handle_request_defer():170] handle defer: 3
+2023-03-31 01:24:33,120 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: defer
+2023-03-31 01:24:33,120 INFO    SenderThread:81859 [sender.py:send_request_defer():583] handle sender defer: 3
+2023-03-31 01:24:33,120 INFO    SenderThread:81859 [sender.py:transition_state():587] send defer: 4
+2023-03-31 01:24:33,120 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: defer
+2023-03-31 01:24:33,120 INFO    HandlerThread:81859 [handler.py:handle_request_defer():170] handle defer: 4
+2023-03-31 01:24:33,120 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: defer
+2023-03-31 01:24:33,120 INFO    SenderThread:81859 [sender.py:send_request_defer():583] handle sender defer: 4
+2023-03-31 01:24:33,120 INFO    SenderThread:81859 [sender.py:transition_state():587] send defer: 5
+2023-03-31 01:24:33,120 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: defer
+2023-03-31 01:24:33,120 INFO    HandlerThread:81859 [handler.py:handle_request_defer():170] handle defer: 5
+2023-03-31 01:24:33,121 DEBUG   SenderThread:81859 [sender.py:send():336] send: summary
+2023-03-31 01:24:33,121 INFO    SenderThread:81859 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-03-31 01:24:33,121 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: defer
+2023-03-31 01:24:33,121 INFO    SenderThread:81859 [sender.py:send_request_defer():583] handle sender defer: 5
+2023-03-31 01:24:33,121 INFO    SenderThread:81859 [sender.py:transition_state():587] send defer: 6
+2023-03-31 01:24:33,121 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: defer
+2023-03-31 01:24:33,121 INFO    HandlerThread:81859 [handler.py:handle_request_defer():170] handle defer: 6
+2023-03-31 01:24:33,122 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: defer
+2023-03-31 01:24:33,122 INFO    SenderThread:81859 [sender.py:send_request_defer():583] handle sender defer: 6
+2023-03-31 01:24:33,122 INFO    SenderThread:81859 [sender.py:transition_state():587] send defer: 7
+2023-03-31 01:24:33,122 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: status_report
+2023-03-31 01:24:33,122 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: defer
+2023-03-31 01:24:33,122 INFO    HandlerThread:81859 [handler.py:handle_request_defer():170] handle defer: 7
+2023-03-31 01:24:33,122 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: defer
+2023-03-31 01:24:33,122 INFO    SenderThread:81859 [sender.py:send_request_defer():583] handle sender defer: 7
+2023-03-31 01:24:33,251 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/wandb-summary.json
+2023-03-31 01:24:34,092 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: poll_exit
+2023-03-31 01:24:34,251 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:34,310 INFO    SenderThread:81859 [sender.py:transition_state():587] send defer: 8
+2023-03-31 01:24:34,311 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: poll_exit
+2023-03-31 01:24:34,311 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: defer
+2023-03-31 01:24:34,312 INFO    HandlerThread:81859 [handler.py:handle_request_defer():170] handle defer: 8
+2023-03-31 01:24:34,312 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: defer
+2023-03-31 01:24:34,313 INFO    SenderThread:81859 [sender.py:send_request_defer():583] handle sender defer: 8
+2023-03-31 01:24:34,318 INFO    SenderThread:81859 [sender.py:transition_state():587] send defer: 9
+2023-03-31 01:24:34,318 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: defer
+2023-03-31 01:24:34,318 INFO    HandlerThread:81859 [handler.py:handle_request_defer():170] handle defer: 9
+2023-03-31 01:24:34,318 DEBUG   SenderThread:81859 [sender.py:send():336] send: artifact
+2023-03-31 01:24:35,093 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: poll_exit
+2023-03-31 01:24:35,252 INFO    Thread-13 :81859 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:35,439 INFO    SenderThread:81859 [sender.py:send_artifact():1428] sent artifact job-https___github.com_everbarry_JBG040-Group19.git_final_main.py - {'id': 'QXJ0aWZhY3Q6NDEwNDE4ODg1', 'digest': '248beb027aa3869263955ba4a8a5848d', 'state': 'COMMITTED', 'aliases': [{'artifactCollectionName': 'job-https___github.com_everbarry_JBG040-Group19.git_final_main.py', 'alias': 'latest'}, {'artifactCollectionName': 'job-https___github.com_everbarry_JBG040-Group19.git_final_main.py', 'alias': 'v3'}], 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjU5NTk3NTg1', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6NDEwNDE4ODg1', 'versionIndex': 3}}, 'version': 'v3'}
+2023-03-31 01:24:35,440 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: defer
+2023-03-31 01:24:35,440 INFO    SenderThread:81859 [sender.py:send_request_defer():583] handle sender defer: 9
+2023-03-31 01:24:35,440 INFO    SenderThread:81859 [dir_watcher.py:finish():365] shutting down directory watcher
+2023-03-31 01:24:36,252 INFO    SenderThread:81859 [dir_watcher.py:finish():395] scan: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files
+2023-03-31 01:24:36,252 INFO    SenderThread:81859 [dir_watcher.py:finish():409] scan save: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/wandb-metadata.json wandb-metadata.json
+2023-03-31 01:24:36,253 INFO    SenderThread:81859 [dir_watcher.py:finish():409] scan save: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/requirements.txt requirements.txt
+2023-03-31 01:24:36,253 INFO    SenderThread:81859 [dir_watcher.py:finish():409] scan save: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log output.log
+2023-03-31 01:24:36,253 INFO    SenderThread:81859 [dir_watcher.py:finish():409] scan save: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/wandb-summary.json wandb-summary.json
+2023-03-31 01:24:36,253 INFO    SenderThread:81859 [dir_watcher.py:finish():409] scan save: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/config.yaml config.yaml
+2023-03-31 01:24:36,253 INFO    SenderThread:81859 [sender.py:transition_state():587] send defer: 10
+2023-03-31 01:24:36,253 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: poll_exit
+2023-03-31 01:24:36,253 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: defer
+2023-03-31 01:24:36,254 INFO    HandlerThread:81859 [handler.py:handle_request_defer():170] handle defer: 10
+2023-03-31 01:24:36,256 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: defer
+2023-03-31 01:24:36,257 INFO    SenderThread:81859 [sender.py:send_request_defer():583] handle sender defer: 10
+2023-03-31 01:24:36,257 INFO    SenderThread:81859 [file_pusher.py:finish():164] shutting down file pusher
+2023-03-31 01:24:36,859 INFO    wandb-upload_2:81859 [upload_job.py:push():138] Uploaded file /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/wandb-summary.json
+2023-03-31 01:24:36,942 INFO    wandb-upload_0:81859 [upload_job.py:push():138] Uploaded file /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/output.log
+2023-03-31 01:24:36,966 INFO    wandb-upload_3:81859 [upload_job.py:push():138] Uploaded file /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/config.yaml
+2023-03-31 01:24:37,013 INFO    wandb-upload_1:81859 [upload_job.py:push():138] Uploaded file /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/files/requirements.txt
+2023-03-31 01:24:37,213 INFO    Thread-12 (_thread_body):81859 [sender.py:transition_state():587] send defer: 11
+2023-03-31 01:24:37,214 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: defer
+2023-03-31 01:24:37,214 INFO    HandlerThread:81859 [handler.py:handle_request_defer():170] handle defer: 11
+2023-03-31 01:24:37,214 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: defer
+2023-03-31 01:24:37,214 INFO    SenderThread:81859 [sender.py:send_request_defer():583] handle sender defer: 11
+2023-03-31 01:24:37,214 INFO    SenderThread:81859 [file_pusher.py:join():169] waiting for file pusher
+2023-03-31 01:24:37,214 INFO    SenderThread:81859 [sender.py:transition_state():587] send defer: 12
+2023-03-31 01:24:37,214 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: defer
+2023-03-31 01:24:37,214 INFO    HandlerThread:81859 [handler.py:handle_request_defer():170] handle defer: 12
+2023-03-31 01:24:37,214 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: defer
+2023-03-31 01:24:37,215 INFO    SenderThread:81859 [sender.py:send_request_defer():583] handle sender defer: 12
+2023-03-31 01:24:37,698 INFO    SenderThread:81859 [sender.py:transition_state():587] send defer: 13
+2023-03-31 01:24:37,699 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: defer
+2023-03-31 01:24:37,699 INFO    HandlerThread:81859 [handler.py:handle_request_defer():170] handle defer: 13
+2023-03-31 01:24:37,700 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: defer
+2023-03-31 01:24:37,700 INFO    SenderThread:81859 [sender.py:send_request_defer():583] handle sender defer: 13
+2023-03-31 01:24:37,700 INFO    SenderThread:81859 [sender.py:transition_state():587] send defer: 14
+2023-03-31 01:24:37,701 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: defer
+2023-03-31 01:24:37,701 INFO    HandlerThread:81859 [handler.py:handle_request_defer():170] handle defer: 14
+2023-03-31 01:24:37,702 DEBUG   SenderThread:81859 [sender.py:send():336] send: final
+2023-03-31 01:24:37,702 DEBUG   SenderThread:81859 [sender.py:send():336] send: footer
+2023-03-31 01:24:37,702 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: defer
+2023-03-31 01:24:37,702 INFO    SenderThread:81859 [sender.py:send_request_defer():583] handle sender defer: 14
+2023-03-31 01:24:37,703 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: poll_exit
+2023-03-31 01:24:37,704 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: server_info
+2023-03-31 01:24:37,704 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: get_summary
+2023-03-31 01:24:37,705 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: poll_exit
+2023-03-31 01:24:37,705 DEBUG   SenderThread:81859 [sender.py:send_request():363] send_request: server_info
+2023-03-31 01:24:37,707 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: sampled_history
+2023-03-31 01:24:37,888 INFO    MainThread:81859 [wandb_run.py:_footer_history_summary_info():3422] rendering history
+2023-03-31 01:24:37,888 INFO    MainThread:81859 [wandb_run.py:_footer_history_summary_info():3454] rendering summary
+2023-03-31 01:24:37,889 INFO    MainThread:81859 [wandb_run.py:_footer_sync_info():3380] logging synced files
+2023-03-31 01:24:37,889 DEBUG   HandlerThread:81859 [handler.py:handle_request():144] handle_request: shutdown
+2023-03-31 01:24:37,890 INFO    HandlerThread:81859 [handler.py:finish():842] shutting down handler
+2023-03-31 01:24:38,705 INFO    WriterThread:81859 [datastore.py:close():298] close: /home/barry/Desktop/uni/dbl2/JBG040-Group19/final/wandb/run-20230331_011849-rka1ip1g/run-rka1ip1g.wandb
+2023-03-31 01:24:38,887 INFO    SenderThread:81859 [sender.py:finish():1504] shutting down sender
+2023-03-31 01:24:38,888 INFO    SenderThread:81859 [file_pusher.py:finish():164] shutting down file pusher
+2023-03-31 01:24:38,888 INFO    SenderThread:81859 [file_pusher.py:join():169] waiting for file pusher

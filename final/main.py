@@ -76,7 +76,7 @@ def parser():
     return parser.parse_args()
 
 
-def getData(batch_size, weights):
+def getData(batch_size, weights, num_workers, sample_weights):
     """creates torch Dataframe, Weighted Samples the data to balance batches and return DataLoader ready for training.
     """
     #TODO hardcoded paths
@@ -84,10 +84,10 @@ def getData(batch_size, weights):
     train_dataset = AugImageDataset(Path('../data/X_train.npy'), Path('../data/Y_train.npy'))
     test_dataset = AugImageDataset(Path('../data/X_test.npy'), Path('../data/Y_test.npy'))
     # Create the WeightedRandomSampler
-    sampler = WeightedRandomSampler(weights=weights, num_samples=len(weights), replacement=True)
+    sampler = WeightedRandomSampler(weights=sample_weights, num_samples=len(sample_weights)*4, replacement=True)
     # Create DataLoader objs
-    train_loader = DataLoader(dataset=train_dataset, batch_size=len(train_dataset)//batch_size, num_workers=8, shuffle=True)#sampler=sampler)
-    test_loader = DataLoader(dataset=test_dataset, batch_size=len(test_dataset)//batch_size, shuffle=True, num_workers=8)
+    train_loader = DataLoader(dataset=train_dataset, batch_size=len(train_dataset)//batch_size, num_workers=num_workers, sampler=sampler)
+    test_loader = DataLoader(dataset=test_dataset, batch_size=len(test_dataset)//batch_size, shuffle=True, num_workers=num_workers)
     return train_loader, test_loader
 
 
@@ -96,9 +96,10 @@ def getClassWeights():
     """
     #TODO hardcoded paths
     arr = np.load('../data/Y_train.npy')
-    _, counts = np.unique(arr, return_counts=True)   # Calculate unique class labels and their counts
-    weights = arr.size / counts                      # Compute class weights
-    return weights
+    _, counts = np.unique(arr, return_counts=True)   # Calculate unique class labels and
+    weights = 1. / counts                            # Compute class weights
+    sample_weights = np.array([1/weights[i] for i in arr])
+    return weights, sample_weights
 
 
 def runResults(model_name, dropout, depth, device, test_loader, criterion, weights, checkpoint):
@@ -120,14 +121,15 @@ def runResults(model_name, dropout, depth, device, test_loader, criterion, weigh
     # create loss function
     match criterion:
         case 'CrossEntropy':
-            criterion = CrossEntropyLoss(torch.Tensor(weights).to(device))
+            #criterion = CrossEntropyLoss(torch.Tensor(weights).to(device))
+            criterion = CrossEntropyLoss()
         case 'BCELoss':
             criterion = BCEWithLogitsLoss(pos_weight=torch.Tensor(weights).to(device))
     acc, (y_true, y_pred) = test_loop(device, test_loader, model, optimizer, criterion)
     kappa = cohen_kappa_score(y_true, y_pred)
     cm = confusion_matrix(y_true, y_pred)
     f1, f1_balanced, f1_per_class = f1_score(y_true, y_pred, average='macro'), f1_score(y_true, y_pred, average='weighted'), f1_score(y_true, y_pred, average=None)
-    print(f'\n {"-"*20}\nTest set accuracy: {acc}')
+    print(f'\n {"-"*20} RESULTS {"-"*20}\nTest set accuracy: {acc}')
     print(f'unbalanced F1 score: {f1}')
     print(f'balanced F1 score: {f1_balanced}')
     print(f'per class F1 score: {f1_per_class}')
@@ -182,12 +184,12 @@ def main():
     device = initEnv()
 
     checkData()
-    weights = getClassWeights()
-    train_loader, test_loader = getData(args.n_batches, weights)
+    weights, sample_weights = getClassWeights()
+    train_loader, test_loader = getData(args.n_batches, weights, args.n_workers, sample_weights)
 
     if args.train is False:
         #TODO hardcoded weights loading
-        runResults('ViT', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, 'ViT-final-e40-03:28:21:50.pth')
+        runResults('ViT', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, 'ViT-best-e34-03:28:21:32.pth')
         runResults('CNN', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, '')
         return
     else:

@@ -1,0 +1,187 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 214/214 [01:53<00:00,  1.89it/s]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 257/257 [00:31<00:00,  8.19it/s]
+  1%|█▍                                                                                                                                                    | 2/214 [00:01<02:20,  1.51it/s]
+checkpointed model: ViT-best-e0-03:31:01:21.pth
+Epoch: 0, Average loss: 1.6572, Train Accuracy: 50086/84205 (59.48)%, Test Acc: (34.72)%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 214/214 [02:24<00:00,  1.48it/s]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 257/257 [00:35<00:00,  7.20it/s]
+  0%|                                                                                                                                                              | 0/214 [00:00<?, ?it/s]
+checkpointed model: ViT-best-e1-03:31:01:24.pth
+Epoch: 1, Average loss: 1.6469, Train Accuracy: 50245/84205 (59.67)%, Test Acc: (34.73)%
+
+
+
+
+
+
+
+ 11%|████████████████▋                                                                                                                                    | 24/214 [00:16<02:08,  1.48it/s]
+Traceback (most recent call last):
+  File "/home/barry/Desktop/uni/dbl2/JBG040-Group19/final/main.py", line 205, in <module>
+    main()
+  File "/home/barry/Desktop/uni/dbl2/JBG040-Group19/final/main.py", line 199, in main
+    best_model = trainModel(args.model, device, args.drop_rate, args.optimizer, args.learning_rate, args.scheduler, args.criterion, weights, args.epochs, train_loader, test_loader, args.early_stop_thresh)
+  File "/home/barry/Desktop/uni/dbl2/JBG040-Group19/final/main.py", line 175, in trainModel
+    best_model = train_loop(epochs, train_loader, device, optimizer, model, criterion, test_loader, early_stop_thresh, fast=False)
+  File "/home/barry/Desktop/uni/dbl2/JBG040-Group19/final/train_test.py", line 66, in train_loop
+    dct['train_losses'].append(loss.item())
+KeyboardInterrupt

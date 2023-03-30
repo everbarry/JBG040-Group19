@@ -1,0 +1,39 @@
+
+  0%|                                                                                                                                                               | 0/11 [00:24<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1120, in _try_get_data
+    data = self._data_queue.get(timeout=timeout)
+  File "/usr/lib/python3.10/multiprocessing/queues.py", line 113, in get
+    if not self._poll(timeout):
+  File "/usr/lib/python3.10/multiprocessing/connection.py", line 257, in poll
+    return self._poll(timeout)
+  File "/usr/lib/python3.10/multiprocessing/connection.py", line 424, in _poll
+    r = wait([self], timeout)
+  File "/usr/lib/python3.10/multiprocessing/connection.py", line 931, in wait
+    ready = selector.select(timeout)
+  File "/usr/lib/python3.10/selectors.py", line 416, in select
+    fd_event_list = self._selector.poll(timeout)
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/utils/data/_utils/signal_handling.py", line 66, in handler
+    _error_if_any_worker_fails()
+RuntimeError: DataLoader worker (pid 74490) is killed by signal: Killed.
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+  File "/home/barry/Desktop/uni/dbl2/JBG040-Group19/final/main.py", line 205, in <module>
+    main()
+  File "/home/barry/Desktop/uni/dbl2/JBG040-Group19/final/main.py", line 199, in main
+    best_model = trainModel(args.model, device, args.drop_rate, args.optimizer, args.learning_rate, args.scheduler, args.criterion, weights, args.epochs, train_loader, test_loader, args.early_stop_thresh)
+  File "/home/barry/Desktop/uni/dbl2/JBG040-Group19/final/main.py", line 175, in trainModel
+    best_model = train_loop(epochs, train_loader, device, optimizer, model, criterion, test_loader, early_stop_thresh, fast=False)
+  File "/home/barry/Desktop/uni/dbl2/JBG040-Group19/final/train_test.py", line 56, in train_loop
+    for _, batch_sample in enumerate(tqdm(train_loader)):
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/tqdm/std.py", line 1195, in __iter__
+    for obj in iterable:
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 628, in __next__
+    data = self._next_data()
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1316, in _next_data
+    idx, data = self._get_data()
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1282, in _get_data
+    success, data = self._try_get_data()
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1133, in _try_get_data
+    raise RuntimeError('DataLoader worker (pid(s) {}) exited unexpectedly'.format(pids_str)) from e
+RuntimeError: DataLoader worker (pid(s) 74490) exited unexpectedly
