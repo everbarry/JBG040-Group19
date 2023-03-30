@@ -1,0 +1,10 @@
+
+  0%|▏                                            | 1/257 [00:06<27:41,  6.49s/it]
+Traceback (most recent call last):
+  File "/home/barry/Desktop/uni/dbl2/JBG040-Group19/VIT/hope.py", line 130, in <module>
+    loss.backward()               # backpropagation
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/_tensor.py", line 488, in backward
+    torch.autograd.backward(
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/autograd/__init__.py", line 197, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 76.00 MiB (GPU 0; 5.80 GiB total capacity; 4.26 GiB already allocated; 54.62 MiB free; 4.44 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF

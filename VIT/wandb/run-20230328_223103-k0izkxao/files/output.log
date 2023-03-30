@@ -1,0 +1,35 @@
+
+
+
+
+
+
+
+
+
+
+
+
+ 16%|██████████▎                                                    | 42/257 [00:24<02:06,  1.70it/s]
+Traceback (most recent call last):
+  File "/home/barry/Desktop/uni/dbl2/JBG040-Group19/VIT/hope.py", line 123, in <module>
+    output = model(X)             # forward pass
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 549, in forward
+    x = self.forward_features(x)
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 538, in forward_features
+    x = self.blocks(x)
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/nn/modules/container.py", line 204, in forward
+    input = module(input)
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 268, in forward
+    x = x + self.drop_path1(self.ls1(self.attn(self.norm1(x))))
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/barry/anaconda3/envs/dbl2/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 221, in forward
+    attn = attn.softmax(dim=-1)
+KeyboardInterrupt

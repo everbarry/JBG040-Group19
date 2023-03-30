@@ -1,0 +1,7 @@
+
+
+  2%|███▌                                                                                                                                                  | 6/257 [00:04<03:26,  1.22it/s]
+Traceback (most recent call last):
+  File "/home/barry/Desktop/uni/dbl2/JBG040-Group19/VIT/hope.py", line 131, in <module>
+    dct['train_losses'].append(loss.item())
+KeyboardInterrupt

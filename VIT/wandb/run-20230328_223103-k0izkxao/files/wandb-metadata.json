@@ -1,0 +1,105 @@
+{
+    "os": "Linux-6.2.8-arch1-1-x86_64-with-glibc2.37",
+    "python": "3.10.10",
+    "heartbeatAt": "2023-03-28T20:31:04.108180",
+    "startedAt": "2023-03-28T20:31:03.592858",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/barry/Desktop/uni/dbl2/JBG040-Group19/VIT/hope.py",
+    "codePath": "VIT/hope.py",
+    "git": {
+        "remote": "https://github.com/everbarry/JBG040-Group19.git",
+        "commit": "80ea6787ef5ff596635108c38f98d2500c7331da"
+    },
+    "email": "alessandro.preiti@protonmail.com",
+    "root": "/home/barry/Desktop/uni/dbl2/JBG040-Group19",
+    "host": "Arch",
+    "username": "barry",
+    "executable": "/home/barry/anaconda3/envs/dbl2/bin/python3",
+    "cpu_count": 6,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 3500.208916666667,
+        "min": 800.0,
+        "max": 5000.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3500.324,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 3500.069,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 3500.016,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 3500.003,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 3499.937,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 3499.983,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 3500.4,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 3500.045,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 3500.233,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 3500.004,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 3499.996,
+            "min": 800.0,
+            "max": 5000.0
+        },
+        {
+            "current": 3500.02,
+            "min": 800.0,
+            "max": 5000.0
+        }
+    ],
+    "disk": {
+        "total": 465.8809127807617,
+        "used": 421.7343635559082
+    },
+    "gpu": "NVIDIA GeForce GTX 1660 Ti",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce GTX 1660 Ti",
+            "memory_total": 6442450944
+        }
+    ],
+    "memory": {
+        "total": 15.408565521240234
+    }
+}

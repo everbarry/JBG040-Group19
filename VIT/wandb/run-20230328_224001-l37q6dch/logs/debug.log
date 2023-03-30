@@ -1,0 +1,26 @@
+2023-03-28 22:40:01,121 INFO    MainThread:1778 [wandb_setup.py:_flush():76] Configure stats pid to 1778
+2023-03-28 22:40:01,121 INFO    MainThread:1778 [wandb_setup.py:_flush():76] Loading settings from /home/barry/.config/wandb/settings
+2023-03-28 22:40:01,121 INFO    MainThread:1778 [wandb_setup.py:_flush():76] Loading settings from /home/barry/Desktop/uni/dbl2/JBG040-Group19/VIT/wandb/settings
+2023-03-28 22:40:01,121 INFO    MainThread:1778 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-03-28 22:40:01,121 INFO    MainThread:1778 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-03-28 22:40:01,121 INFO    MainThread:1778 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'VIT/hope.py', 'program': '/home/barry/Desktop/uni/dbl2/JBG040-Group19/VIT/hope.py'}
+2023-03-28 22:40:01,121 INFO    MainThread:1778 [wandb_init.py:_log_setup():506] Logging user logs to /home/barry/Desktop/uni/dbl2/JBG040-Group19/VIT/wandb/run-20230328_224001-l37q6dch/logs/debug.log
+2023-03-28 22:40:01,122 INFO    MainThread:1778 [wandb_init.py:_log_setup():507] Logging internal logs to /home/barry/Desktop/uni/dbl2/JBG040-Group19/VIT/wandb/run-20230328_224001-l37q6dch/logs/debug-internal.log
+2023-03-28 22:40:01,122 INFO    MainThread:1778 [wandb_init.py:init():546] calling init triggers
+2023-03-28 22:40:01,122 INFO    MainThread:1778 [wandb_init.py:init():552] wandb.init called with sweep_config: {}
+config: {'learning_rate': 3e-05, 'architecture': 'vit_tiny_patch16_224', 'dataset': 'XRay Dataset', 'epochs': 50, 'dropout': 0.5}
+2023-03-28 22:40:01,122 INFO    MainThread:1778 [wandb_init.py:init():602] starting backend
+2023-03-28 22:40:01,122 INFO    MainThread:1778 [wandb_init.py:init():606] setting up manager
+2023-03-28 22:40:01,124 INFO    MainThread:1778 [backend.py:_multiprocessing_setup():106] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2023-03-28 22:40:01,125 INFO    MainThread:1778 [wandb_init.py:init():613] backend started and connected
+2023-03-28 22:40:01,126 INFO    MainThread:1778 [wandb_init.py:init():701] updated telemetry
+2023-03-28 22:40:01,129 INFO    MainThread:1778 [wandb_init.py:init():741] communicating run to backend with 60.0 second timeout
+2023-03-28 22:40:01,538 INFO    MainThread:1778 [wandb_run.py:_on_init():2133] communicating current version
+2023-03-28 22:40:01,615 INFO    MainThread:1778 [wandb_run.py:_on_init():2142] got version response 
+2023-03-28 22:40:01,615 INFO    MainThread:1778 [wandb_init.py:init():789] starting run threads in backend
+2023-03-28 22:40:01,648 INFO    MainThread:1778 [wandb_run.py:_console_start():2114] atexit reg
+2023-03-28 22:40:01,649 INFO    MainThread:1778 [wandb_run.py:_redirect():1969] redirect: SettingsConsole.WRAP_RAW
+2023-03-28 22:40:01,649 INFO    MainThread:1778 [wandb_run.py:_redirect():2034] Wrapping output streams.
+2023-03-28 22:40:01,649 INFO    MainThread:1778 [wandb_run.py:_redirect():2059] Redirects installed.
+2023-03-28 22:40:01,649 INFO    MainThread:1778 [wandb_init.py:init():831] run started, returning control to user process
+2023-03-28 22:40:11,790 WARNING MsgRouterThr:1778 [router.py:message_loop():77] message_loop has been closed

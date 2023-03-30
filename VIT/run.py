@@ -5,7 +5,7 @@ import os
 import numpy as np
 import torch
 from torch.optim import Adam, SGD
-from torch.nn import CrossEntropyLoss
+from torch.nn import CrossEntropyLoss, BCEWithLogitsLoss
 from torchsummary import summary
 from torch.utils.data import DataLoader
 # import modules
@@ -104,6 +104,7 @@ def main():
     model = VisionTransformer(input_size, [args.patch_size,args.patch_size], args.hidden_dim, num_heads, output_dim)
     model = model.to(device)
     criterion = CrossEntropyLoss()
+    criterion = BCEWithLogitsLoss(pos_weight=torch.Tensor([.3, 3. , 3., 3., 3., 3.]))
     if args.optimizer == 'Adam':
         optimizer = Adam(model.parameters(),lr=args.learning_rate)
     elif args.optimizer == 'SGD':
