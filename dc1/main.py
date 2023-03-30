@@ -43,22 +43,6 @@ def resume(model: Net, filename: str) -> None:
 
 def main(args: argparse.Namespace, activeloop: bool = True) -> None:
 
-    # Load the train and test data set
-    if args.augiter > 1:
-        train_dataset = AugImageDataset(
-            Path("../data/X_train.npy"), Path("../data/Y_train.npy"),
-            augmentation_iter=args.augiter)
-    else:
-        train_dataset = ImageDataset(
-            Path("../data/X_train.npy"), Path("../data/Y_train.npy"))
-
-    test_dataset = ImageDataset(
-        Path("../data/X_test.npy"), Path("../data/Y_test.npy"))
-
-    # Visualize dataset
-    if args.augvis:
-        visualize_augmentation(train_dataset)
-
     # Load the Neural Net. NOTE: set number of distinct labels here
     model = Net(n_classes=6)
 
@@ -94,6 +78,23 @@ def main(args: argparse.Namespace, activeloop: bool = True) -> None:
         device = "cpu"
         # Creating a summary of our model and its layers:
         summary(model, (1, 128, 128), device=device)
+
+    # Load the train and test data set
+    if args.augiter >= 1:
+        train_dataset = AugImageDataset(
+            Path("../data/X_train.npy"), Path("../data/Y_train.npy"),
+            augmentation_iter=args.augiter, device=device)
+    else:
+        train_dataset = ImageDataset(
+            Path("../data/X_train.npy"), Path("../data/Y_train.npy"))
+
+    test_dataset = ImageDataset(
+        Path("../data/X_test.npy"), Path("../data/Y_test.npy"))
+
+    # Visualize dataset
+    if args.augvis:
+        visualize_augmentation(train_dataset)
+
 
     # Lets now train and test our model for multiple epochs:
     train_sampler = BatchSampler(
