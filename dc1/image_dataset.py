@@ -19,7 +19,7 @@ class ImageDataset(Dataset):
     to pass the data through the neural network and apply weights).
     """
 
-    def __init__(self, x: Path, y: Path, transform:Callable = None) -> None:
+    def __init__(self, x: Path, y: Path, transform=None) -> None:
         # Target labels
         self.targets = ImageDataset.load_numpy_arr_from_npy(y)
         # Images
@@ -53,44 +53,29 @@ class ImageDataset(Dataset):
 
 
 
-class AugImageDataset(ImageDataset):
+class AugImageDataset(ConcatDataset):
     """
     Used for lazy data augmentation with while using the ImageDataset
     """
 
     def __init__(self, x: Path, y: Path,
-                 transform: List[Callable] = None,
-                 augmentation_iter: int = 5,
-                 device: str = 'cpu') -> None:
-        # Create a PyTorch dataset from the X and y arrays
-        super().__init__(x,y)
-        if transform is None:
-            self.transform = [None] + [transforms.Compose([
+                 augmentation_iter:int = 5,
+                 transform=None) -> None:
+
+        # Define your transformations
+        if not transform:
+            transform = transforms.Compose([
                 transforms.RandomAffine(degrees=5, scale=(0.95, 1.05)),
-            ])] * augmentation_iter
+            ])
+            
+        # Create a PyTorch dataset from the X and y arrays
+        super().__init__(
+            [ImageDataset(x, y, transform = tr)
+             for tr in [None] + [transform] * augmentation_iter ])
 
-        print(len(self.transform))
-         
-        self.rawlen = len(self.targets)
-        self.targets = np.tile(self.targets, len(self.transform))
-        self.device = device
-
-
-    def __len__(self) -> int:
-        return len(self.targets)
-
-    def __getitem__(self, idx: int) -> Tuple[torch.Tensor, np.ndarray]:
-        tidx = idx // self.rawlen
-        idx = idx % self.rawlen
-        transform = self.transform[tidx]
-        label = self.targets[idx]
-
-        image = torch.tensor(self.imgs[idx] / 255).float().to(self.device)
-        if transform:
-            image = transform(image)
-
-        return image, label
-
+        self.transform = transform
+        self.targets = np.concatenate(
+            [dataset.targets for dataset in self.datasets])
 
 
 def load_numpy_arr_from_url(url: str) -> np.ndarray:
@@ -132,26 +117,31 @@ def gen_augmented_dataset(X_path:Path,
 
 
 if __name__ == "__main__":
-    cwd = os.getcwd()
-    if path.exists(path.join(cwd + "data/")):
-        print("Data directory exists, files may be overwritten!")
-    else:
-        os.mkdir(path.join(cwd, "../data/"))
-    ### Load labels
-    train_y = load_numpy_arr_from_url(
-        url="https://surfdrive.surf.nl/files/index.php/s/i6MvQ8nqoiQ9Tci/download"
-    )
-    np.save("../data/Y_train.npy", train_y)
-    test_y = load_numpy_arr_from_url(
-        url="https://surfdrive.surf.nl/files/index.php/s/wLXiOjVAW4AWlXY/download"
-    )
-    np.save("../data/Y_test.npy", test_y)
-    ### Load data
-    train_x = load_numpy_arr_from_url(
-        url="https://surfdrive.surf.nl/files/index.php/s/4rwSf9SYO1ydGtK/download"
-    )
-    np.save("../data/X_train.npy", train_x)
-    test_x = load_numpy_arr_from_url(
-        url="https://surfdrive.surf.nl/files/index.php/s/dvY2LpvFo6dHef0/download"
-    )
-    np.save("../data/X_test.npy", test_x)
+    train_dataset = AugImageDataset(
+        Path("../data/X_train.npy"), Path("../data/Y_train.npy"))
+
+    print(train_dataset.targets)
+    
+#     cwd = os.getcwd()
+#     if path.exists(path.join(cwd + "data/")):
+#         print("Data directory exists, files may be overwritten!")
+#     else:
+#         os.mkdir(path.join(cwd, "../data/"))
+#     ### Load labels
+#     train_y = load_numpy_arr_from_url(
+#         url="https://surfdrive.surf.nl/files/index.php/s/i6MvQ8nqoiQ9Tci/download"
+#     )
+#     np.save("../data/Y_train.npy", train_y)
+#     test_y = load_numpy_arr_from_url(
+#         url="https://surfdrive.surf.nl/files/index.php/s/wLXiOjVAW4AWlXY/download"
+#     )
+#     np.save("../data/Y_test.npy", test_y)
+#     ### Load data
+#     train_x = load_numpy_arr_from_url(
+#         url="https://surfdrive.surf.nl/files/index.php/s/4rwSf9SYO1ydGtK/download"
+#     )
+#     np.save("../data/X_train.npy", train_x)
+#     test_x = load_numpy_arr_from_url(
+#         url="https://surfdrive.surf.nl/files/index.php/s/dvY2LpvFo6dHef0/download"
+#     )
+#     np.save("../data/X_test.npy", test_x)
