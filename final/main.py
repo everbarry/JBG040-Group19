@@ -16,6 +16,7 @@ import argparse
 # import modules
 from image_dataset import AugImageDataset
 from train_test import train_loop, test_loop, CosineWarmupScheduler
+from cnnnet import CNNet
 
 
 def initEnv(random_seed=19):
@@ -121,7 +122,10 @@ def runResults(model_name, dropout, depth, device, test_loader, criterion, weigh
 
     elif model_name == 'CNN':
         #TODO integrate CNN
-        raise NotImplementedError
+        model = CNNet(n_classes = 6)
+        if checkpoint:
+            model.load_state_dict(torch.load(f'models/{checkpoint}'))
+        model.to(device)
     # create optimizer, will not be used anyways as we are not computing gradients
     optimizer = Adam(model.parameters(), lr=0.001)
     # create loss function
@@ -159,7 +163,10 @@ def trainModel(model_name, device, dropout, optimizer, lr, scheduler, criterion,
         model.to(device)
     elif model_name == 'CNN':
         #TODO integrate CNN
-        raise NotImplementedError
+        model = CNNet(n_classes=6)
+        if checkpoint is not None:
+            model.load_state_dict(torch.load(f'models/{checkpoint}'))
+        model.to(device)
     # create optimizer
     match optimizer:
         case 'Adam':
@@ -196,7 +203,7 @@ def main():
 
     checkData()
     weights, sample_weights = getClassWeights()
-    train_loader, test_loader = getData(args.n_batches, weights, args.n_workers, sample_weights)
+    train_loader, test_loader = getData(args.n_batches, weights, args.n_workers, sample_weights, args.balance_batches)
 
     if args.train is False:
         #TODO hardcoded weights loading
