@@ -73,20 +73,26 @@ def parser():
     parser.add_argument('-s', '--scheduler', help='specify the learning rate scheduler to use', choices=['CosineWarmup', 'StepLR'], default='StepLR')
     parser.add_argument('-dr', '--drop-rate', help='specify drop rate from model (.0-.99)', default=0.35, type=float)
     parser.add_argument('-c', '--criterion', help='specify which loss function to use', choices=['CrossEntropy', 'BCELoss'], default='CrossEntropy')
+    parser.add_argument('-cw', '--class-weights', help='if specified data class weights are used to balance the loss function', action='store_true')
+    parser.add_argument('-bb', '--balance-batches', help='if specified WeightedRandomSampler is used to sample from data to uniformize class distribution.', action='store_true')
+    parser.add_argument('-to', '--timeout', help='if specified training is stopped after 1 hour 50 mins', action='store_true')
     return parser.parse_args()
 
 
-def getData(batch_size, weights, num_workers, sample_weights):
+def getData(batch_size, weights, num_workers, sample_weights, balance_batches):
     """creates torch Dataframe, Weighted Samples the data to balance batches and return DataLoader ready for training.
     """
     #TODO hardcoded paths
     # Create DataSet objs
     train_dataset = AugImageDataset(Path('../data/X_train.npy'), Path('../data/Y_train.npy'))
     test_dataset = AugImageDataset(Path('../data/X_test.npy'), Path('../data/Y_test.npy'))
-    # Create the WeightedRandomSampler
-    sampler = WeightedRandomSampler(weights=sample_weights, num_samples=len(sample_weights)*4, replacement=True)
-    # Create DataLoader objs
-    train_loader = DataLoader(dataset=train_dataset, batch_size=len(train_dataset)//batch_size, num_workers=num_workers, sampler=sampler)
+    if balance_batches:
+        # Create the WeightedRandomSampler
+        sampler = WeightedRandomSampler(weights=sample_weights, num_samples=len(sample_weights)*4, replacement=True)
+        # Create DataLoader objs
+        train_loader = DataLoader(dataset=train_dataset, batch_size=len(train_dataset)//batch_size, num_workers=num_workers, sampler=sampler)
+    else:
+        train_loader = DataLoader(dataset=train_dataset, batch_size=len(train_dataset)//batch_size, shuffle=True, num_workers=num_workers)
     test_loader = DataLoader(dataset=test_dataset, batch_size=len(test_dataset)//batch_size, shuffle=True, num_workers=num_workers)
     return train_loader, test_loader
 
@@ -102,7 +108,7 @@ def getClassWeights():
     return weights, sample_weights
 
 
-def runResults(model_name, dropout, depth, device, test_loader, criterion, weights, checkpoint):
+def runResults(model_name, dropout, depth, device, test_loader, criterion, weights, checkpoint, use_weights):
     """runs validation and metrics on given model settings
     """
     # create model
@@ -121,8 +127,10 @@ def runResults(model_name, dropout, depth, device, test_loader, criterion, weigh
     # create loss function
     match criterion:
         case 'CrossEntropy':
-            #criterion = CrossEntropyLoss(torch.Tensor(weights).to(device))
-            criterion = CrossEntropyLoss()
+            if use_weights:
+                criterion = CrossEntropyLoss(torch.Tensor(weights).to(device))
+            else:
+                criterion = CrossEntropyLoss()
         case 'BCELoss':
             criterion = BCEWithLogitsLoss(pos_weight=torch.Tensor(weights).to(device))
     acc, (y_true, y_pred) = test_loop(device, test_loader, model, optimizer, criterion)
@@ -138,7 +146,7 @@ def runResults(model_name, dropout, depth, device, test_loader, criterion, weigh
 
 
 
-def trainModel(model_name, device, dropout, optimizer, lr, scheduler, criterion, weights, epochs, train_loader, test_loader, early_stop_thresh, checkpoint=None):
+def trainModel(model_name, device, dropout, optimizer, lr, scheduler, criterion, weights, epochs, train_loader, test_loader, early_stop_thresh, use_weights, timeout, checkpoint=None):
     """trains model given settings.
     """
     # create model
@@ -169,11 +177,14 @@ def trainModel(model_name, device, dropout, optimizer, lr, scheduler, criterion,
     # create loss function
     match criterion:
         case 'CrossEntropy':
-            criterion = CrossEntropyLoss(torch.Tensor(weights).to(device))
+            if use_weights:
+                criterion = CrossEntropyLoss(torch.Tensor(weights).to(device))
+            else:
+                criterion = CrossEntropyLoss()
         case 'BCELoss':
             criterion = BCEWithLogitsLoss(pos_weight=torch.Tensor(weights).to(device))
     # train model
-    best_model = train_loop(epochs, train_loader, device, optimizer, model, criterion, test_loader, early_stop_thresh, fast=False)
+    best_model = train_loop(epochs, train_loader, device, optimizer, model, criterion, test_loader, early_stop_thresh, timeout, fast=False)
     return best_model
 
 
@@ -189,16 +200,16 @@ def main():
 
     if args.train is False:
         #TODO hardcoded weights loading
-        runResults('ViT', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, 'ViT-best-e34-03:28:21:32.pth')
-        runResults('CNN', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, '')
+        runResults('ViT', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, 'ViT-best-e34-03:28:21:32.pth', args.class_weights)
+        runResults('CNN', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, '', args.class_weights)
         return
     else:
         # set the wandb project where this run will be logged
         wandb.init(project="dc1", config={"learning_rate": args.learning_rate, "architecture": args.model,
                                           "dataset": "XRay Dataset", "epochs": args.epochs,
                                           "dropout":args.drop_rate, "depth": args.depth})
-        best_model = trainModel(args.model, device, args.drop_rate, args.optimizer, args.learning_rate, args.scheduler, args.criterion, weights, args.epochs, train_loader, test_loader, args.early_stop_thresh)
-        runResults('ViT', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, best_model)
+        best_model = trainModel(args.model, device, args.drop_rate, args.optimizer, args.learning_rate, args.scheduler, args.criterion, weights, args.epochs, train_loader, test_loader, args.early_stop_thresh, args.class_weights, args.timeout)
+        runResults('ViT', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, best_model, args.class_weights)
         wandb.finish()
         return
 

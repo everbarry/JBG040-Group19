@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 from tqdm import tqdm
-from datetime import datetime
+from datetime import datetime, timedelta
 import wandb
 import torch.optim as optim
 
@@ -17,7 +17,7 @@ def checkpoint(model, epoch, name):
 
 def test_loop(device, test_loader, model, optimizer, criterion):
     #test loop
-    #model.eval()
+    model.eval()
     with torch.no_grad():
         test_losses = []
         y_true, y_pred = [], []
@@ -44,12 +44,13 @@ def test_loop(device, test_loader, model, optimizer, criterion):
         return test_acc, (y_true, y_pred)
 
 
-def train_loop(epochs, train_loader, device, optimizer, model, criterion, test_loader, early_stop_thresh, fast=False):
+def train_loop(epochs, train_loader, device, optimizer, model, criterion, test_loader, early_stop_thresh, timeout, fast=False):
     """train loop if fast=True doesnt run validation every epoch
     """
     #TODO implement fast training, dont log nothing just as fast as possible
     #TODO add timeout after 1hour 45mins
-    #model.train()
+    start = datetime.now()
+    model.train()
     best = ''
     for epoch in range(epochs):
         dct = {'accuracies': [], 'best_acc': -1, 'best_epoch': 0, 'train_losses': [], 'correct': 0, 'total': 0}
@@ -86,7 +87,12 @@ def train_loop(epochs, train_loader, device, optimizer, model, criterion, test_l
             print('Terminating training, early stopping model')
             return best
         print(f'Epoch: {epoch}, Average loss: {train_loss:.4f}, Train Accuracy: {dct["correct"]}/{dct["total"]} ({train_acc:.2f})%, Test Acc: ({dct["best_acc"]:.2f})%')
-        checkpoint(model, epochs, 'final')
+        if timeout:
+            now = datetime.now()
+            if (now-start) > timedelta(hours=1, minutes=50):
+                checkpoint(model, epochs, 'timeout')
+                return best
+    checkpoint(model, epochs, 'final')
     return best
 
 class CosineWarmupScheduler(optim.lr_scheduler._LRScheduler):
