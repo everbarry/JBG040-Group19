@@ -22,7 +22,8 @@ from cnnnet import CNNet
 def initEnv(random_seed=19):
     """init device, sets random seeed for reproducibilit.
     """
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')# if cuda gpu available use that
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    # if cuda gpu available use that
     # support Apple Silicon
     device = torch.device('mps' if torch.backends.mps.is_available() else device)
     # set fixed random seed for repeatability
@@ -80,13 +81,13 @@ def parser():
     return parser.parse_args()
 
 
-def getData(batch_size, weights, num_workers, sample_weights, balance_batches):
+def getData(batch_size, weights, num_workers, sample_weights, balance_batches, device='cpu'): 
     """creates torch Dataframe, Weighted Samples the data to balance batches and return DataLoader ready for training.
     """
     #TODO hardcoded paths
     # Create DataSet objs
-    train_dataset = AugImageDataset(Path('../data/X_train.npy'), Path('../data/Y_train.npy'))
-    test_dataset = AugImageDataset(Path('../data/X_test.npy'), Path('../data/Y_test.npy'))
+    train_dataset = AugImageDataset(Path('../data/X_train.npy'), Path('../data/Y_train.npy'), device=device)
+    test_dataset = AugImageDataset(Path('../data/X_test.npy'), Path('../data/Y_test.npy'), device=device)
     if balance_batches:
         # Create the WeightedRandomSampler
         sampler = WeightedRandomSampler(weights=sample_weights, num_samples=len(sample_weights)*4, replacement=True)
