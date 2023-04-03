@@ -17,6 +17,7 @@ import argparse
 from image_dataset import AugImageDataset
 from train_test import train_loop, test_loop, CosineWarmupScheduler
 from cnnnet import CNNet
+from vis import vis_cm, vis_roc
 
 
 def initEnv(random_seed=19):
@@ -43,7 +44,6 @@ def checkData():
                 "https://surfdrive.surf.nl/files/index.php/s/i6MvQ8nqoiQ9Tci/download",
                 "https://surfdrive.surf.nl/files/index.php/s/wLXiOjVAW4AWlXY/download"]
         for url, file in zip(urls, file_list):
-
             np.save(os.path.join('../data/', file), load_numpy_arr_from_url(url))
 
 
@@ -208,8 +208,8 @@ def main():
 
     if args.train is False:
         #TODO hardcoded weights loading
-        runResults('ViT', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, 'ViT-best-e34-03:28:21:32.pth', args.class_weights)
-        runResults('CNN', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, '', args.class_weights)
+        # runResults('ViT', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, 'ViT-best-e34-03:28:21:32.pth', args.class_weights)
+        runResults('CNN', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, 'CNN-final-e20-04:03:12:15.pth', args.class_weights)
         return
     else:
         # set the wandb project where this run will be logged

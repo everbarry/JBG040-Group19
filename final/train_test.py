@@ -7,6 +7,7 @@ import torch.optim as optim
 from cnnnet import CNNet
 from typing import Callable, List
 from torch.utils.data import DataLoader
+from vis import vis_cm, vis_roc
 
 def checkpoint(model, epoch, name):
     #save weights
@@ -25,7 +26,7 @@ def test_loop(device, test_loader, model, optimizer, criterion):
     model.eval()
     with torch.no_grad():
         test_losses = []
-        y_true, y_pred = [], []
+        y_true, y_pred, pred_prob = [], [], []
         correct = 0
         for batch_idx, batch_sample in enumerate(tqdm(test_loader)):
             #get data from dataloader
@@ -39,13 +40,23 @@ def test_loop(device, test_loader, model, optimizer, criterion):
             test_losses.append(loss.item())
             _, predicted = torch.max(output, 1)
             correct += (predicted == y).sum().item()
+            pred_prob.append(output.cpu().numpy())
             y_true.append(y.cpu().tolist())
             y_pred.append(predicted.cpu().tolist())
-        #return results
         test_loss = float(np.mean(test_losses))
         test_acc = 100 * correct / len(test_loader.dataset)
         y_true = [element for sublist in y_true for element in sublist]
         y_pred = [element for sublist in y_pred for element in sublist]
+        # Visualisations
+        cats = ["Pneumothorax",
+               "Nodule",
+               "Infiltration",
+               "Effusion",
+               "Atelectasis",
+               "No decease",]
+        vis_cm(y_true, y_pred,cats)
+        pred_prob = np.concatenate(pred_prob)
+        vis_roc(np.asarray(y_true),pred_prob, cats)
         return test_acc, (y_true, y_pred)
 
 
@@ -83,6 +94,8 @@ def train_loop(epochs, train_loader, device, optimizer, model, criterion, test_l
         test_acc, (y_true, y_pred) = test_loop(device, test_loader, model, optimizer, criterion)
         dct['accuracies'].append(test_acc)
         wandb.log({'train acc': train_acc, 'test acc': test_acc, 'loss': train_loss})
+
+
         if dct['accuracies'][-1] > dct['best_acc']:
             dct['best_acc'] = dct['accuracies'][-1]
             dct['best_epoch'] = epoch
@@ -120,72 +133,3 @@ class CosineWarmupScheduler(optim.lr_scheduler._LRScheduler):
             return lr_factor
 
 
-# def cnn_train_model(
-#         model: Net,
-#         train_sampler: BatchSampler,
-#         optimizer: torch.optim.Optimizer,
-#         loss_function: Callable[..., torch.Tensor],
-#         device: str,
-# ) -> List[torch.Tensor]:
-#     # Lets keep track of all the losses:
-#     losses = []
-#     # Put the model in train mode:
-#     model.train()
-#     # Feed all the batches one by one:
-#     correct = 0
-#     total = 0
-# 
-#     for batch in tqdm(train_sampler):
-#         # Get a batch:
-#         x, y = batch
-#         # Making sure our samples are stored on the same device as our model:
-#         x, y = x.to(device), y.to(device)
-#         # Get predictions:
-#         predictions = model.forward(x)
-#         loss = loss_function(predictions, y)
-#         losses.append(loss)
-#         # We first need to make sure we reset our optimizer at the start.
-#         # We want to learn from each batch seperately,
-#         # not from the entire dataset at once.
-#         optimizer.zero_grad()
-#         # We now backpropagate our loss through our model:
-#         loss.backward()
-#         # We then make the optimizer take a step in the right direction.
-#         optimizer.step()
-#         _, predicted = torch.max(predictions, 1)
-#         correct += (predicted == y).sum().item()
-#         total += len(y)
-#     print(f'correct: {correct}/{total}\nacc: {correct/total:.2f}')
-#     return losses, correct, total, y, predicted
-# 
-# 
-# def cnn_test_model(
-#         model: CNNet,
-#         test_sampler: DataLoader,
-#         loss_function: Callable[..., torch.Tensor],
-#         device: str,
-# ) -> List[torch.Tensor]:
-#     # Setting the model to evaluation mode:
-#     model.eval()
-#     losses = []
-#     # We need to make sure we do not update our model based on the test data:
-#     correct = 0
-#     total = 0
-#     y_true, y_pred = [], []
-#     with torch.no_grad():
-#         for (x, y) in tqdm(test_sampler):
-#             # Making sure our samples are stored on the same device as our model:
-#             x = x.to(device)
-#             y = y.to(device)
-#             prediction = model.forward(x)
-#             loss = loss_function(prediction, y)
-#             losses.append(loss)
-#             _, predicted = torch.max(prediction, 1)
-#             correct += (predicted == y).sum().item()
-#             total += len(y)
-#             y_true.append(y.cpu())
-#             y_pred.append(predicted.cpu())
-# 
-#     print(f'correct: {correct}/{total}\nacc: {correct / total:.2f}')
-#     return losses, correct, total, (y_true, y_pred)
-# 

@@ -65,7 +65,6 @@ class AugImageDataset(ImageDataset):
             self.transform = [transforms.Compose([
                 transforms.RandomAffine(degrees=5, scale=(0.95, 1.05)),
             ])] * augmentation_iter
-        print(len(self.transform))
 
         self.rawlen = len(self.targets)
         self.targets = np.tile(self.targets, augmentation_iter)

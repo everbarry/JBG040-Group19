@@ -117,31 +117,26 @@ def gen_augmented_dataset(X_path:Path,
 
 
 if __name__ == "__main__":
-    train_dataset = AugImageDataset(
-        Path("../data/X_train.npy"), Path("../data/Y_train.npy"))
-
-    print(train_dataset.targets)
-    
-#     cwd = os.getcwd()
-#     if path.exists(path.join(cwd + "data/")):
-#         print("Data directory exists, files may be overwritten!")
-#     else:
-#         os.mkdir(path.join(cwd, "../data/"))
-#     ### Load labels
-#     train_y = load_numpy_arr_from_url(
-#         url="https://surfdrive.surf.nl/files/index.php/s/i6MvQ8nqoiQ9Tci/download"
-#     )
-#     np.save("../data/Y_train.npy", train_y)
-#     test_y = load_numpy_arr_from_url(
-#         url="https://surfdrive.surf.nl/files/index.php/s/wLXiOjVAW4AWlXY/download"
-#     )
-#     np.save("../data/Y_test.npy", test_y)
-#     ### Load data
-#     train_x = load_numpy_arr_from_url(
-#         url="https://surfdrive.surf.nl/files/index.php/s/4rwSf9SYO1ydGtK/download"
-#     )
-#     np.save("../data/X_train.npy", train_x)
-#     test_x = load_numpy_arr_from_url(
-#         url="https://surfdrive.surf.nl/files/index.php/s/dvY2LpvFo6dHef0/download"
-#     )
-#     np.save("../data/X_test.npy", test_x)
+    cwd = os.getcwd()
+    if path.exists(path.join(cwd + "data/")):
+        print("Data directory exists, files may be overwritten!")
+    else:
+        os.mkdir(path.join(cwd, "../data/"))
+    ### Load labels
+    train_y = load_numpy_arr_from_url(
+        url="https://surfdrive.surf.nl/files/index.php/s/i6MvQ8nqoiQ9Tci/download"
+    )
+    np.save("../data/Y_train.npy", train_y)
+    test_y = load_numpy_arr_from_url(
+        url="https://surfdrive.surf.nl/files/index.php/s/wLXiOjVAW4AWlXY/download"
+    )
+    np.save("../data/Y_test.npy", test_y)
+    ### Load data
+    train_x = load_numpy_arr_from_url(
+        url="https://surfdrive.surf.nl/files/index.php/s/4rwSf9SYO1ydGtK/download"
+    )
+    np.save("../data/X_train.npy", train_x)
+    test_x = load_numpy_arr_from_url(
+        url="https://surfdrive.surf.nl/files/index.php/s/dvY2LpvFo6dHef0/download"
+    )
+    np.save("../data/X_test.npy", test_x)
