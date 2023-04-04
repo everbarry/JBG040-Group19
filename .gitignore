@@ -3,7 +3,6 @@ VIT/__pycache__/*
 local/
 Data_Challenge_1_template.egg-info/
 model_weights/
-**/models/
 *.ipynb
 artifacts/
 .DS_store
