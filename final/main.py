@@ -37,6 +37,9 @@ def initEnv(random_seed=19):
 def checkData():
     """check if .npy data is present on machine, if not download it.
     """
+    directory_path = '../data'
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
     file_list = ["X_train.npy", "X_test.npy", "Y_train.npy", "Y_test.npy"]
     if any(not os.path.isfile(os.path.join('../data/', file)) for file in file_list):
         urls = ["https://surfdrive.surf.nl/files/index.php/s/4rwSf9SYO1ydGtK/download",
@@ -81,7 +84,7 @@ def parser():
     return parser.parse_args()
 
 
-def getData(batch_size, weights, num_workers, sample_weights, balance_batches, device='cpu'): 
+def getData(batch_size, weights, num_workers, sample_weights, balance_batches, device='cpu'):
     """creates torch Dataframe, Weighted Samples the data to balance batches and return DataLoader ready for training.
     """
     #TODO hardcoded paths
@@ -139,6 +142,7 @@ def runResults(model_name, dropout, depth, device, test_loader, criterion, weigh
         case 'BCELoss':
             criterion = BCEWithLogitsLoss(pos_weight=torch.Tensor(weights).to(device))
     acc, (y_true, y_pred) = test_loop(device, test_loader, model, optimizer, criterion)
+    np.savez_compressed(f'results_{model_name}_compressed.npz', y_true=y_true, y_pred=y_pred)
     kappa = cohen_kappa_score(y_true, y_pred)
     cm = confusion_matrix(y_true, y_pred)
     f1, f1_balanced, f1_per_class = f1_score(y_true, y_pred, average='macro'), f1_score(y_true, y_pred, average='weighted'), f1_score(y_true, y_pred, average=None)
@@ -199,8 +203,9 @@ def trainModel(model_name, device, dropout, optimizer, lr, scheduler, criterion,
 def main():
     """main that runs the hole project
     """
+    random_seed = 19
     args = parser()
-    device = initEnv()
+    device = initEnv(random_seed=random_seed)
 
     checkData()
     weights, sample_weights = getClassWeights()
@@ -208,14 +213,14 @@ def main():
 
     if args.train is False:
         #TODO hardcoded weights loading
-        # runResults('ViT', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, 'ViT-best-e34-03:28:21:32.pth', args.class_weights)
-        runResults('CNN', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, 'CNN-final-e20-04:03:12:15.pth', args.class_weights)
+        runResults('ViT', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, 'ViT-best.pth', args.class_weights)
+        runResults('CNN', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, 'CNN-best.pth', args.class_weights)
         return
     else:
         # set the wandb project where this run will be logged
         wandb.init(project="dc1", config={"learning_rate": args.learning_rate, "architecture": args.model,
                                           "dataset": "XRay Dataset", "epochs": args.epochs,
-                                          "dropout":args.drop_rate, "depth": args.depth})
+                                          "dropout":args.drop_rate, "depth": args.depth, "random seed": random_seed})
         best_model = trainModel(args.model, device, args.drop_rate, args.optimizer, args.learning_rate, args.scheduler, args.criterion, weights, args.epochs, train_loader, test_loader, args.early_stop_thresh, args.class_weights, args.timeout)
         runResults('ViT', args.drop_rate, args.depth, device, test_loader, args.criterion, weights, best_model, args.class_weights)
         wandb.finish()
