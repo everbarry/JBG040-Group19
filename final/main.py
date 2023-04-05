@@ -15,7 +15,7 @@ import io
 import argparse
 # import modules
 from image_dataset import AugImageDataset
-from train_test import train_loop, test_loop, CosineWarmupScheduler
+from train_test import train_loop, test_loop, CosineWarmupScheduler, demo
 from cnnnet import CNNet
 from vis import vis_cm, vis_roc
 
@@ -146,13 +146,13 @@ def runResults(model_name, dropout, depth, device, test_loader, criterion, weigh
     kappa = cohen_kappa_score(y_true, y_pred)
     cm = confusion_matrix(y_true, y_pred)
     f1, f1_balanced, f1_per_class = f1_score(y_true, y_pred, average='macro'), f1_score(y_true, y_pred, average='weighted'), f1_score(y_true, y_pred, average=None)
-    print(f'\n {"-"*20} RESULTS {"-"*20}\nTest set accuracy: {acc}')
+    print(f'\n {"-"*20} RESULTS {model_name} {"-"*20}\nTest set accuracy: {acc}')
     print(f'unbalanced F1 score: {f1}')
     print(f'balanced F1 score: {f1_balanced}')
     print(f'per class F1 score: {f1_per_class}')
     print(f'\nCohens Kappa coeff: {kappa}')
     print(f'\nConfusion Matrix:\n{cm}\n')
-
+    demo(device, test_loader, model)
 
 
 def trainModel(model_name, device, dropout, optimizer, lr, scheduler, criterion, weights, epochs, train_loader, test_loader, early_stop_thresh, use_weights, timeout, checkpoint=None):
