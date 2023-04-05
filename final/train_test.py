@@ -115,33 +115,6 @@ def train_loop(epochs, train_loader, device, optimizer, model, criterion, test_l
     return best
 
 
-def demo2(device, test_loader, model):
-    threshold = .4
-    cats = ["Pneumothorax", "Nodule", "Infiltration", "Effusion", "Atelectasis", "No decease"]
-    model = model.to(device)
-    data_iter = iter(test_loader)
-    random_batch = next(data_iter)
-    inputs, _ = random_batch
-    inputs = inputs.to(device)
-    with torch.no_grad():  # Disable gradient calculations for memory efficiency
-        softmax = torch.nn.Softmax(dim=1)
-        probabilities = softmax(model(inputs)).cpu().numpy()
-    # Visualize the first 10 images and their predicted class probabilities
-    fig, axes = plt.subplots(2, 5, figsize=(15, 6))
-    for i, ax in enumerate(axes.flat):
-        img = (inputs[i].cpu().numpy().transpose((1, 2, 0)) * 0.5) + 0.5
-        ax.imshow(img, cmap='gray' if img.shape[2] == 1 else None)
-        title_text = "\n".join([f"{cats[j]}: {probabilities[i][j]:.2f}"
-                            for j in range(len(probabilities[i]))])
-        flag = any(prob > threshold for prob in probabilities[i][:-1])
-        flag_color = 'red' if flag else 'black'
-        title_text += f"\nFurther screening: {flag}"
-        ax.set_title(title_text, fontsize=10)
-        ax.text(0, -30, title_text, color=flag_color, fontsize=10, transform=ax.transAxes)
-        ax.axis("off")
-    plt.show()
-
-
 def demo(device, test_loader, model):
     threshold = .4
     cats = ["Pneumothorax", "Nodule", "Infiltration", "Effusion", "Atelectasis", "No decease"]
