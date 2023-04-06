@@ -1,6 +1,6 @@
 # Data Challenge 1
 This repository contains the template code for the TU/e course JBG040 Data Challenge 1.
-Please read this document carefully as it has been filled out with important information.
+Please read this document carefully as it has been filled out with important information on how to run the code.
 
 ## Get Started .
 to get started working on this open a terminal, type in `cd <theDirectory/youWant/toWorkin>`, then only the first time you download the repo do:
@@ -11,85 +11,74 @@ conda create --name dbl python=3.10
 conda activate dbl 
 conda install --file requirements.txt
 ```
+if the last command fails, try executing: `pip install -r requirements.txt`
 this downloads the repository, creates a new environment for this project and then installs all the dependencies.
 Now anytime you want to run anything related to this project before make sure you are in the correct environment by typing in the terminal `conda activate dbl`, once activated navigate to the `JBG040-Group19` folder with `cd /path/to/JBG040-Group19`.
 Now to download the data in that terminal run:
 ```
-cd VIT
-python3 run.py -v
+cd final
+python3 main.py
 ```
-this runs the model on the test set with pretrained weights and downloads the data to the `data` folder 
+this runs both models (CNN, ViT) on the test set with our best pretrained weights and downloads the data to the `data` folder 
 for more informaton about the ViT see the README in its folder
 
-## Code structure
+## Repository structure
+The repo is split in the `dc1` folder, used for the CNN developement, the `VIT` folder used for ViT developement and the `final` folder which contains the final deliverable.
+#### DC1
+- `batch_sampler.py`: contains batch sampler to samples uniformely distributed sample from data
+- `cross_val_test.py`: used for testing cross validation
+- `image_dataset.py`: contains DataSet class that reads data from `.npy` files in the `../data` folder
+- `main.py`: used to run the training and testing loop of the CNN
+- `net.py`: contains Class where CNN is defined 
+- `train_test.py`: contains train, test functions
+
+#### VIT 
+- `image_dataset.py`: dataset class, similair to the one in DC1
+- `model.py`: contains version of ViT Class
+- `hope.py`: new, faster training pipeline, barebones training script used to train the final version of VIT
+-  `train_test.py`: contains train, test functions
+- 
 The template code is structured into multiple files, based on their functionality. 
 There are five `.py` files in total, each containing a different part of the code. 
 Feel free to create new files to explore the data or experiment with other ideas.
 
-- To download the data: run the `ImageDataset.py` file. The script will create a directory `/data/` and download the training and test data with corresponding labels to this directory. 
-    - You will only have to run this script once usually, at the beginning of your project.
+### final
+- `models/` folder: contains models weights
+- `Cohen KAPPA.ipynb`: includes analysis of cohens kappa coefficient
+- `cnnnet.py`: contains class for the CNN
+- `image_dataset`: dataset class, with data augmentation
+- `train_test.py`: contains train, test functions
+- `main.py`: main script to train, eval and compare models, all with cli flags
 
-- To run the whole training/evaluation pipeline: run `main.py`. This script is prepared to do the followings:
-    - Load your train and test data (Make sure its downloaded beforehand!)
-    - Initializes the neural network as defined in the `Net.py` file.
-    - Initialize loss functions and optimizers. If you want to change the loss function/optimizer, do it here.
-    - Define number of training epochs and batch size
-    - Check and enable GPU acceleration for training (if you have CUDA or Apple Silicon enabled device)
-    - Train the neural network and perform evaluation on test set at the end of each epoch.
-    - Provide plots about the training losses both during training in the command line and as a png (saved in the `/artifacts/` subdirectory)
-    - Finally, save your trained model's weights in the `/model_weights/` subdirectory so that you can reload them later.
+## how to run
+open the command prompt and change to the `final` directory containing the main.py file.
+For example, if you're main file is in C:\Data-Challenge-1-template-main\final\, 
+type `cd C:\Data-Challenge-1-template-main\final\` into the command prompt and press enter.
 
-In your project, you are free to modify any parts of this code based on your needs. 
-Note that the Neural Network structure is defined in the `Net.py` file, so if you want to modify the network itself, you can do so in that script.
-The loss functions and optimizers are all defined in `main.py`.
-
-## GitHub setup instructions
-1. Click the green *<> Code* button at the upper right corner of the repositiory.
-2. Make sure that the tab *Local* is selected and click *Download ZIP*.
-3. Go to the GitHub homepage and create a new repository.
-4. Make sure that the repository is set to **private** and give it the name **JBG040-GroupXX**, where XX is your group number.
-5. Press *uploading an exisiting file* and upload the extracted files from Data-Challenge-1-template-main.zip to your repository. Note that for the initial commit you should commit directly to the main branch
-6. Invite your **group members, tutor and teachers** by going to *Settings > Collaborators > Add people*.
-7. Open PyCharm and make sure that your GitHub account is linked.*
-8. In the welcome screen of PyCharm, click *Get from VCs > GitHub* and select your repository and click on clone.
-9. After the repository is cloned, you can now create a virtual environment using the requirements.txt.
-
-*For information on how to install PyCharm and link Github to your PyCharm, we refer to the additional resources page on Canvas.
-
-
-## Environment setup instructions
-We recommend to set up a virtual Python environment to install the package and its dependencies. To install the package, we recommend to execute `pip install -r requirements.txt.` in the command line. This will install it in editable mode, meaning there is no need to reinstall after making changes. If you are using PyCharm, it should offer you the option to create a virtual environment from the requirements file on startup. Note that also in this case, it will still be necessary to run the pip command described above.
-
-## Submission instructions
-After each sprint, you are expected to submit your code. This will **not** be done in Canvas, instead you will be creating a release of your current repository. 
-A release is essentially a snapshot of your repository taken at a specific time. 
-Your future modifications are not going to affect this release.
-**Note that you are not allowed to update your old releases after the deadline.**
-For more information on releases, see the [GitHub releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases) page.
-
-1. Make sure that your code is running without issues and that **everything is pushed to the main branch**.
-2. Head over to your repository and click on *Releases* (located at the right-hand side).
-3. Click on the green button *Create a new release*.*
-4. Click on *Choose a tag*.
-5. Fill in the textbox with **SprintX** where X is the current sprint number and press *Create new tag: SprintX*. 
-6. Make sure that *Target: main* or *Target: master* (depending on your main/master branch) is selected, so that the code release will be based on your main branch. 
-7. Fill in the title of the release with **Group XX Sprint X** where XX is your group number and X is the current sprint number.
-8. Click the *Publish release* button to create a release for your sprint.
-9. **Verify** that your release has been succesfully created by heading over to your repository and press the *Releases* button once again. There you should be able to see your newly created release.
-
-*After the first release, you should click *Draft a new release* instead of *Create a new release*
-
-## Mypy
-The template is created with support for full typehints. This enables the use of a powerful tool called `mypy`. Code with typehinting can be statically checked using this tool. It is recommended to use this tool as it can increase confidence in the correctness of the code before testing it. Note that usage of this tool and typehints in general is entirely up to the students and not enforced in any way. To execute the tool, simply run `mypy .`. For more information see https://mypy.readthedocs.io/en/latest/faq.html
-
-## Argparse
-Argparse functionality is included in the main.py file. This means the file can be run from the command line while passing arguments to the main function. Right now, there are arguments included for the number of epochs (nb_epochs), batch size (batch_size), and whether to create balanced batches (balanced_batches). You are free to add or remove arguments as you see fit.
-
-To make use of this functionality, first open the command prompt and change to the directory containing the main.py file.
-For example, if you're main file is in C:\Data-Challenge-1-template-main\dc1\, 
-type `cd C:\Data-Challenge-1-template-main\dc1\` into the command prompt and press enter.
-
-Then, main.py can be run by, for example, typing `python main.py --nb_epochs 10 --batch_size 25`.
+Then, main.py can be run by, for example, typing `python main.py --epochs 10 --balanced_batches`.
 This would run the script with 10 epochs, a batch size of 25, and balanced batches, which is also the current default.
 If you would want to run the script with 20 epochs, a batch size of 5, and batches that are not balanced, 
 you would type `main.py --nb_epochs 20 --batch_size 5 --no-balanced_batches`.
+Here are all the command line arguments:
+**Usage**: `ViT Vision transformer [-h] [-t] [-m {CNN,ViT}] [-e EPOCHS] [-l LEARNING_RATE] [-p PATCH_SIZE] [-d DEPTH] [-o {SGD,Adam,RAdam}] [-w N_WORKERS] [-st EARLY_STOP_THRESH] [-b N_BATCHES] [-s {CosineWarmup,StepLR}] [-dr DROP_RATE] [-c {CrossEntropy,BCELoss}] [-cw] [-bb] [-to]`
+
+**Description**: alternative model trained on the same Xray dataset
+
+**Options**:
+- `-h, --help`: show this help message and exit
+- `-t, --train`: if specified model is trained with given hyperparams
+- `-m {CNN,ViT}, --model {CNN,ViT}`: specify model to train, to specify only if training the model
+- `-e EPOCHS, --epochs EPOCHS`: specify number of epochs
+- `-l LEARNING_RATE, --learning-rate LEARNING_RATE`: specify learning rate
+- `-p PATCH_SIZE, --patch-size PATCH_SIZE`: specify size of patch to section image, e.g: 8 = divide 128x128 image in 8x8 patches
+- `-d DEPTH, --depth DEPTH`: specify number of layers in the hidden dimension of the model
+- `-o {SGD,Adam,RAdam}, --optimizer {SGD,Adam,RAdam}`: specify optimizer to use with the model
+- `-w N_WORKERS, --n-workers N_WORKERS`: specify number of CPU threads to load data
+- `-st EARLY_STOP_THRESH, --early-stop-thresh EARLY_STOP_THRESH`: threshold of number of epochs to early stop training if test acc doesnt improve
+- `-b N_BATCHES, --n-batches N_BATCHES`: specify number of batches to split the dataset into
+- `-s {CosineWarmup,StepLR}, --scheduler {CosineWarmup,StepLR}`: specify the learning rate scheduler to use
+- `-dr DROP_RATE, --drop-rate DROP_RATE`: specify drop rate from model (.0-.99)
+- `-c {CrossEntropy,BCELoss}, --criterion {CrossEntropy,BCELoss}`: specify which loss function to use
+- `-cw, --class-weights`: if specified data class weights are used to balance the loss function
+- `-bb, --balance-batches`: if specified WeightedRandomSampler is used to sample from data to uniformize class distribution.
+- `-to, --timeout`: if specified training is stopped after 1 hour 50 mins
