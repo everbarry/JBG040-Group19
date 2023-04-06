@@ -9,9 +9,8 @@ git clone https://github.com/everbarry/JBG040-Group19.git
 cd JBG040-Group19/
 conda create --name dbl python=3.10 
 conda activate dbl 
-conda install --file requirements.txt
+pip install -r requirements.txt
 ```
-if the last command fails, try executing: `pip install -r requirements.txt`
 this downloads the repository, creates a new environment for this project and then installs all the dependencies.
 Now anytime you want to run anything related to this project before make sure you are in the correct environment by typing in the terminal `conda activate dbl`, once activated navigate to the `JBG040-Group19` folder with `cd /path/to/JBG040-Group19`.
 Now to download the data in that terminal run:
@@ -20,7 +19,8 @@ cd final
 python3 main.py
 ```
 this runs both models (CNN, ViT) on the test set with our best pretrained weights and downloads the data to the `data` folder 
-for more informaton about the ViT see the README in its folder
+for more informaton about the ViT see the README in its folder.
+PS: if python3 main.py errors try `python main.py`
 
 ## Repository structure
 The repo is split in the `dc1` folder, used for the CNN developement, the `VIT` folder used for ViT developement and the `final` folder which contains the final deliverable.
@@ -54,15 +54,16 @@ Feel free to create new files to explore the data or experiment with other ideas
 open the command prompt and change to the `final` directory containing the main.py file.
 For example, if you're main file is in C:\Data-Challenge-1-template-main\final\, 
 type `cd C:\Data-Challenge-1-template-main\final\` into the command prompt and press enter.
+make sure the conda environment we created for this project is active, if not type in the terminal `conda activate dbl`.
 
-Then, main.py can be run by, for example, typing `python main.py --epochs 10 --balanced_batches`.
-This would run the script with 10 epochs, a batch size of 25, and balanced batches, which is also the current default.
-If you would want to run the script with 20 epochs, a batch size of 5, and batches that are not balanced, 
-you would type `main.py --nb_epochs 20 --batch_size 5 --no-balanced_batches`.
+Then, main.py can be run by, for example, typing `python main.py --train -m CNN --epochs 10 --balanced_batches`.
+This would run the script and train the CNN with 10 epochs, balanced batches.
+If you would want to run the script to train the ViT for 20 epochs, 
+you would type `main.py --train --model ViT -e 20`.
 Here are all the command line arguments:
-**Usage**: `ViT Vision transformer [-h] [-t] [-m {CNN,ViT}] [-e EPOCHS] [-l LEARNING_RATE] [-p PATCH_SIZE] [-d DEPTH] [-o {SGD,Adam,RAdam}] [-w N_WORKERS] [-st EARLY_STOP_THRESH] [-b N_BATCHES] [-s {CosineWarmup,StepLR}] [-dr DROP_RATE] [-c {CrossEntropy,BCELoss}] [-cw] [-bb] [-to]`
+**Usage**: `python[-h] [-t] [-m {CNN,ViT}] [-e EPOCHS] [-l LEARNING_RATE] [-p PATCH_SIZE] [-d DEPTH] [-o {SGD,Adam,RAdam}] [-w N_WORKERS] [-st EARLY_STOP_THRESH] [-b N_BATCHES] [-s {CosineWarmup,StepLR}] [-dr DROP_RATE] [-c {CrossEntropy,BCELoss}] [-cw] [-bb] [-to]`
 
-**Description**: alternative model trained on the same Xray dataset
+**Description**: Pipeline script to train, eval and get results for all our system.
 
 **Options**:
 - `-h, --help`: show this help message and exit
