@@ -20,7 +20,7 @@ python3 main.py
 ```
 this runs both models (CNN, ViT) on the test set with our best pretrained weights and downloads the data to the `data` folder 
 for more informaton about the ViT see the README in its folder.
-PS: if python3 main.py errors try `python main.py`
+PS: if `python3 main.py` errors try `python main.py`
 
 ## Repository structure
 The repo is split in the `dc1` folder, used for the CNN developement, the `VIT` folder used for ViT developement and the `final` folder which contains the final deliverable.
