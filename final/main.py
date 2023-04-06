@@ -121,14 +121,14 @@ def runResults(model_name, dropout, depth, device, test_loader, criterion, weigh
         #TODO integrate timm in project
         model = timm.create_model('vit_tiny_patch16_224', pretrained=False, num_classes=6, img_size=128,
                                 in_chans=1, drop_rate=dropout)
-        model.load_state_dict(torch.load(f'models/{checkpoint}'))
+        model.load_state_dict(torch.load(f'models/{checkpoint}', map_location=torch.device(torch.device(device))))
         model.to(device)
 
     elif model_name == 'CNN':
         #TODO integrate CNN
         model = CNNet(n_classes = 6)
         if checkpoint:
-            model.load_state_dict(torch.load(f'models/{checkpoint}'))
+            model.load_state_dict(torch.load(f'models/{checkpoint}', map_location=torch.device(torch.device(device)))
         model.to(device)
     # create optimizer, will not be used anyways as we are not computing gradients
     optimizer = Adam(model.parameters(), lr=0.001)
@@ -164,13 +164,13 @@ def trainModel(model_name, device, dropout, optimizer, lr, scheduler, criterion,
         model = timm.create_model('vit_tiny_patch16_224', pretrained=False, num_classes=6, img_size=128,
                                 in_chans=1, drop_rate=dropout)
         if checkpoint is not None:
-            model.load_state_dict(torch.load(f'models/{checkpoint}'))
+            model.load_state_dict(torch.load(f'models/{checkpoint}', map_location=torch.device(torch.device(device)))
         model.to(device)
     elif model_name == 'CNN':
         #TODO integrate CNN
         model = CNNet(n_classes=6)
         if checkpoint is not None:
-            model.load_state_dict(torch.load(f'models/{checkpoint}'))
+            model.load_state_dict(torch.load(f'models/{checkpoint}', map_location=torch.device(torch.device(device)))
         model.to(device)
     # create optimizer
     match optimizer:
